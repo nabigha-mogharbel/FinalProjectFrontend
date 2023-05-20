@@ -6,7 +6,7 @@ function BottomNav() {
   const location = useLocation();
   return (
     <div className="btmNav">
-      <Link to="/app/passenger/main"><HomeLogo location={location}/></Link>
+      <Link to="/app/passenger/"><HomeLogo location={location}/></Link>
       <Link to="/app/passenger/live">
         <LiveLogo location={location} />
       </Link>
@@ -17,7 +17,7 @@ function BottomNav() {
   );
 }
 function HomeLogo({ location }) {
-  if (location.pathname === "/app/passenger/main") {
+  if (location.pathname === "/app/passenger/") {
     return (
       <svg
         width="34"

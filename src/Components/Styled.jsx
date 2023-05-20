@@ -29,21 +29,22 @@ export const Input = styled.input`
     `};
 `;
 export const Card = styled.div`
-  width: 80%;
+  width: 85%;
   height:150px;
   box-sizing:border-box;
-  border-radius: 10px 50px 100px 10px;
-  padding: 8px 30px 8px 8px;
+  border-radius: 50px 10px 10px 100px;
+  padding: 8px 8px 8px 24px;
   box-shadow: 3px 2px 4px 2px #ccc;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   font-size: larger;
-  & date{
+  text-transform:uppercase;
+  & .date{
     grid-column: 3/4;
     grid-row: 1/2;
     justify-self: center;
-    align-self: end;
+    align-self: start;
   }
   & h3{
     grid-column: 1/3;
@@ -74,12 +75,18 @@ export const Card = styled.div`
   ${(props) =>
     props.$onboard &&
     css`
-      &, .status::before {background-color:var(--yellow-l)
+      .status::before {background-color:var(--yellow-d)}
+      & {
+        background-color: var(--yellow-l)}
+      }
     `};
   ${(props) =>
     props.$canceled &&
     css`
-    background-color:var(--orange-l)
+    status::before {background-color:var(--orange-d)}
+      & {
+        background-color;var(--orange-l)}
+      }
 
     `};
   ${(props) =>
@@ -95,13 +102,15 @@ export const Card = styled.div`
   ${(props) =>
     props.$departed &&
     css`
-    background-color:var(--green-l)
+    .status::before {background-color:var(--green-d);}
+    &{background-color:var(--green-l)}
 
     `};
   ${(props) =>
     props.$arrived &&
     css`
-    background-color:var(--blue-l)
+    .status::before {background-color:var(--blue-d);}
+    &{background-color:var(--blue-l)}
 
     `};
 `;

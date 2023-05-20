@@ -14,14 +14,25 @@ import { decodeToken } from "react-jwt";
 import PassengerMain from "./Components/PassengerMain";
 import PassengerTrip from "./Components/PassengerTrip";
 import "./App.css";
-//export const TokenContext=createContext()
-import { TokenContext } from "./context";
+
 function App() {
   const navigate = useNavigate();
   const [isLogged, setLogged] = useState(false);
   const [role, setRole] = useState(null);
   const [id, setId] = useState(null);
   const location = useLocation();
+
+  const Cookie = new Cookies();
+  let bb;
+  let token = Cookie.get("token");
+  if(!token){
+   bb=null
+    
+  }else{
+    let decoded = decodeToken(token);
+    bb=decoded
+    }
+  const TokenContext=createContext(bb)
   useEffect(() => {
     checkToken();
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -47,7 +58,7 @@ function App() {
   return (
     <AnimatePresence mode="wait">
       <TokenContext.Provider
-        value={{ isLogged, setLogged, role, setRole, id, setId }}
+        value={bb}
       >
         <Routes key={location.pathname} location={location}>
           <Route
