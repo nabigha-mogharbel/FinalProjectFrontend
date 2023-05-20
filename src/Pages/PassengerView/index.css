@@ -1,0 +1,14 @@
+.app{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--white);
+}
+.cont{
+    padding-top:20px;
+    overflow-y: scroll;
+    padding-bottom:20px;
+    position:relative;
+    height:calc(100vh - 120px);
+}

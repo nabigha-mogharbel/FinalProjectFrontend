@@ -1,0 +1,42 @@
+.loginsignup{
+    /*background-image: url("../Images/tripoliClock.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: right;*/
+    width: 100vw;
+    height:100vh;
+    box-sizing: border-box;
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.loginsignup .formcontainer{
+    background-color: var(--white);
+    width:90%;
+}
+.formerror, .loginsignup form label sup{
+    color:red;
+    font-size: 0.7em;
+}
+.loginsignup form label sup{
+    padding-left: 4px;
+}
+.loginsignup form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+.loginsignup form label{
+    font-size: large;   
+    margin-bottom: 8px;
+}
+/* .loginsignup form input{
+    width:100%;
+    border: solid 1px var(--blue-d);
+    border-radius: 6px;
+    padding: 8px 6px;
+    margin-bottom: 16px;   
+} */

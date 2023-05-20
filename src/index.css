@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Ubuntu:wght@300;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+:root{
+    --green:rgba(32,78,102,0.5);
+    --white:#f7f7f7;
+    --green-d: #204E66;
+        --green-l: #CBD5D9;
+        --yellow-d: #FCDA23;
+        --yellow-l: #F7F1CC;
+        --orange-d: #D68527;
+        --orange-l: #EAC9A4;
+        --gray-d: #B3B3B3;
+        --gray-l: #E9E9E9;
+        --blue-l: #C5DBE7;
+        --blue-d: #0270A9;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: rgb(32, 78, 102);
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.navbar {
+    background-color: rgb(22, 7, 36);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    line-height: 5rem;
+}
+
+.left h1 {
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+.checkBtn {
+    display: none;
+}
+
+#check {
+    display: none;
+}
+
+.checkBtn {
+    cursor: pointer;
+    font-size: 30px;
+    float: right;
+    color: #ed1e79;
+    line-height: 80px;
+}
+
+.right ul {
+    display: flex;
+    list-style: none;
+}
+
+.right ul li a {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 1s;
+}
+
+.right ul li a:hover {
+    background-color: #fff;
+    border-radius: 7px;
+    color: rgb(22, 7, 36);
+}
+
+@media screen and (max-width:805px) {
+    .list {
+        width: 100%;
+        height: 100vh;
+        background-color: rgb(22, 7, 36);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 4rem;
+        left: 100%;
+        transition: all 1s;
+    }
+
+    #check {
+        display: none;
+    }
+
+    .checkBtn {
+        display: block;
+    }
+
+    #check:checked~ul {
+        left: 0%;
+    }
+
+}
