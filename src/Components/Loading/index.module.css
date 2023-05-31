@@ -21,15 +21,17 @@
 	height: 40px;
 	width: 40px;
 	border-radius: 50%;
-	background-color: #ff0;
+	background-color: var(--yellow-d);
+	background:linear-gradient(45deg, var(--yellow-d), var(--yellow-l));
+
 }
 
 .loader span:nth-child(1) {
-	animation: loading-dotsA 1.5s infinite linear;
+	animation: loading-dotsA 2s infinite linear;
 }
 
 .loader span:nth-child(2) {
-	animation: loading-dotsB 1.5s infinite linear;
+	animation: loading-dotsB 2s infinite linear;
 }
 
 @keyframes loading-dotsA {

@@ -1,0 +1,10 @@
+.popup{
+    position:absolute;
+    width:90vw;
+    margin:auto;
+    border: 1px solid black;
+    left:5vw;
+    background-color: #f7f7f7;
+    padding:20px;
+
+}

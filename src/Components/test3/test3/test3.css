@@ -1,0 +1,120 @@
+/* test2.css */
+
+/* Overall container */
+.home-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Heading styles */
+  h1 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  /* Promotions section */
+  .promotions {
+    margin-bottom: 20px;
+  }
+  
+  .promotion-card {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  
+  .promotion-image {
+    width: 80px;
+    margin-right: 10px;
+  }
+  
+  .promotion-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+  
+  .promotion-details h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  
+  /* Search bar */
+  .search-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .search-bar input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .search-bar button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+  }
+  
+  /* Quick links */
+  .quick-links ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .quick-links li {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  /* App information */
+  .app-info {
+    margin-bottom: 20px;
+  }
+  
+  .app-info p {
+    margin-bottom: 10px;
+  }
+  
+  .app-info button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  /* Testimonials */
+  .testimonials .testimonial {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .testimonials .testimonial svg {
+    color: gold;
+    margin-right: 5px;
+  }
+  

@@ -1,21 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState , useContext} from "react";
 import axios from "axios";
 import { Card } from "../Styled";
 import Loader from "../Loading"
 import { useNavigate } from "react-router-dom";
 import "./index.css";
+import { TokenContext } from "../../context";
 function PassengerMain() {
   const [trips, setTrips] = useState(null);
   const [isLoading, setLoading] = useState(true);
   const navigate = useNavigate();
-
+  const token=useContext(TokenContext)
   useEffect(() => {
     getTrips();
   }, []);
   const getTrips = async () => {
     try {
-      const URL = "http://localhost:8000/";
-      const trips = await axios.get(`${URL}app/trip/`);
+      const URL = process.env.REACT_APP_BASE_URL;
+      // const URL="http://192.168.120.18:8000/"
+      // const URL= env.API_URL
+      const trips = await axios.get(`${URL}app/trip/`, {"headers":{Authorization: `Bearer ${token.token}`}});
       console.log(trips);
       if (trips.status === 200) {
         setTrips(trips.data.data);

@@ -16,13 +16,16 @@
         --gray-l: #E9E9E9;
         --blue-l: #C5DBE7;
         --blue-d: #0270A9;
+        --red-d:rgb(179, 5, 5);
+        --gray-cc:#ccc;
+        --black:#0f2133
 }
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: rgb(32, 78, 102);
-    font-family: 'Bebas Neue', sans-serif;
+    color: var(--black);
+    font-family: 'Kanis', sans-serif;
 }
 
 .navbar {

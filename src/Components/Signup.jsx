@@ -19,7 +19,7 @@ function Signup() {
     const [errorLN, setErrorLN]=useState(false)
 
     const signup=async(body)=>{
-        const URL='http://localhost:8000/'
+        const URL=process.env.REACT_APP_BASE_URL;
         const logging=await axios.post(`${URL}app/auth/register`,body)
         console.log(logging);
         if(logging.status===201){

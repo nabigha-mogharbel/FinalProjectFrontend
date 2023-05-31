@@ -9,8 +9,9 @@ function Authentication(props) {
 // const Cookie = new Cookies();
 //     let token = Cookie.get("token");
 //     let decoded = decodeToken(token);
-    if(token===null){return <Navigate to="/app/login" />}
-    if(token.role===props.role){return <>{props.children}</>}
+console.log("auth checking", token)
+    if(token.token===undefined){return <Navigate to="/app/login" />}
+    if(token.decoded.role===props.role){return <>{props.children}</>}
  return <Navigate to="/app/login" />
 }
 

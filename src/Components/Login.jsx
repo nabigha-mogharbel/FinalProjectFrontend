@@ -6,6 +6,7 @@ import {Button, Input} from "./Styled"
 import { useNavigate, Link } from "react-router-dom";
 import Swal from "sweetalert2"
 import { ToastContainer, toast } from 'react-toastify';
+import { decodeToken } from "react-jwt";
 import cookie from "universal-cookie"
 import 'react-toastify/dist/ReactToastify.css';
 function Login(props) {
@@ -18,12 +19,16 @@ function Login(props) {
     const [errorPassword, setErrorPassword]=useState(false)
     const login=async(body)=>{
         try{
-        const URL="http://localhost:8000/"
+        const URL=process.env.REACT_APP_BASE_URL;
+        // const URL="http://192.168.120.18:8000/"
         const logging=await axios.post(`${URL}app/auth/login`,body)
     
          if(logging.status===200){
             const Cookie=new cookie();
-            Cookie.set("token", logging.data.token)
+            Cookie.set("token", logging.data.token,{
+                path: '/',
+                maxAge: 31536000,
+            })
             toast.success(logging.data.message, {
                 position: "top-right",
                 autoClose: 3000,
@@ -34,8 +39,9 @@ function Login(props) {
                 progress: undefined,
                 theme: "light",
                 });
-                setError("why bb why?")
-                navigate("/app/passenger/")
+                console.log("decoded token",decodeToken(logging.data.token))
+                if(decodeToken(logging.data.token).role==="manager"){navigate("/app/manager/")}
+                else if(decodeToken(logging.data.token).role==="passenger"){navigate("/app/passenger/")}
         }}catch(error){
             setError(error.message.data)
                 toast.error(error.message.data, {
@@ -50,6 +56,8 @@ function Login(props) {
                     });
             
         }
+       // navigate("/app/passenger/")
+
     }
     const submitLogin= (e)=>{
         e.preventDefault();

@@ -1,8 +1,10 @@
 .btmNav{
     display: flex;
     justify-content: space-around;
+    align-items: center;
     padding: 8px 6px;
-    box-shadow: 2px -4px 4px 2px #ccc;
+    /* box-shadow: 2px -4px 4px 2px var(--gray-cc); */
     height:60px;
-    background-color: var(--white);
+    background-color: var(--green-d);
+    border-top: 1px solid var(--gray-cc);
 }
