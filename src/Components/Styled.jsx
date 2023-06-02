@@ -9,6 +9,9 @@ export const Button = styled.button`
   column-gap: 6px;
   align-items:center;
   padding: 8px 6px;
+  @media (max-width:680px){
+    padding:8px  12px;
+  };
   ${(props) =>
     props.$white &&
     css`
@@ -20,6 +23,7 @@ export const Button = styled.button`
       props.$yellow &&
       css`
       background: var(--yellow-d);
+      color: black;
         }
       `};
       ${(props) =>
@@ -90,7 +94,7 @@ export const Input = styled.input`
     `};
 `;
 export const Card = styled.div`
-  width: 85%;
+  width: 100%;
   height:150px;
   box-sizing:border-box;
   // border-radius: 50px 10px 10px 100px;

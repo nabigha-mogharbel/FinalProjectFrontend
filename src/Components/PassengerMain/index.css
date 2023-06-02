@@ -4,4 +4,11 @@
     flex-direction: column;
     justify-content: flex-start;
     row-gap: 20px;
+    width: 95vw;
+    padding-top: 20px;
+
+}
+.tripList h1{
+    align-self: flex-start;
+
 }

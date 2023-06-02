@@ -26,6 +26,7 @@
     box-sizing: border-box;
     color: var(--black);
     font-family: 'Kanis', sans-serif;
+    /* background-color: #f7f7f7; */
 }
 
 .navbar {

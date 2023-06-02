@@ -1,5 +1,4 @@
 import {useState, useRef} from "react"
-import {login} from "../fetchingFunctions/auth"
 import axios from "axios"
 import {Button, Input} from "./Styled"
 import { useNavigate, Link } from "react-router-dom"
@@ -106,7 +105,7 @@ function Signup() {
             <label htmlFor='password'>Password<sup>*</sup></label>
             {!errorPassword && <Input type="password" onChange={(e)=>setFormData(e, "password")} value={form.password} placeholder="Enter Your Password" name="password" id="password"/>}
             {errorPassword && <Input type="password" $error onChange={(e)=>setFormData(e, "password")} value={form.password} placeholder="Enter Your Password" name="password" id="password"/>}
-            <Button type="submit">Signup</Button>
+            <Button type="submit" className="self-center">Signup</Button>
         </form>
         <Link to="/app/login">Already registed?</Link>
         </>

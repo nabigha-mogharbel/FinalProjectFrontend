@@ -3,23 +3,23 @@
   "name": "TripoLine",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "logo_sm.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "logo_sm.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "logo_sm.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#204E66",
+  "theme_color": "#113157",
   "background_color": "#f7f7f7"
 }

@@ -88,6 +88,7 @@ function PassengerTrip() {
     <div className="tripList">
       <Button>
         <Link to="/app/passenger/">
+         
           <svg
             width="15"
             height="10"
@@ -120,7 +121,7 @@ function PassengerTrip() {
             {new Date(trip.scheduleId.endTime).getUTCMinutes()}
           </p>
           
-          <p>
+          <p className="flex flex-row gap-4">
             <svg
               width="40"
               height="28"
@@ -148,9 +149,50 @@ function PassengerTrip() {
             {trip.currentPassengers}
 
           </p>
-          <p>{trip.bookedPassengers.filter(book=> {return book.status==="pending"}).length} requests are pending</p>
-                    <p>{trip.bookedPassengers.filter(book=> {return book.status==="declined"}).length} requests are declined</p>
-          <p>{trip.bookedPassengers.filter(book=> {return book.status==="approved"}).length} requests are approved</p>
+          <p className="flex flex-row gap-4">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill={color["pending"]}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M9 18C13.9706 18 18 13.9706 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18ZM10 3.5C10 2.94772 9.55229 2.5 9 2.5C8.44771 2.5 8 2.94772 8 3.5V8.75C8 9.44036 8.55964 10 9.25 10H12.5C13.0523 10 13.5 9.55228 13.5 9C13.5 8.44772 13.0523 8 12.5 8H10V3.5Z"
+              fill={color["pending"]}
+            />
+          </svg>{trip.bookedPassengers.filter(book=> {return book.status==="pending"}).length}  pending</p>
+                    <p className="flex flex-row gap-4">
+                    <svg
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M18 9C18 13.9706 13.9706 18 9 18C4.02944 18 0 13.9706 0 9C0 4.02944 4.02944 0 9 0C13.9706 0 18 4.02944 18 9ZM3.58579 13L4.29289 12.2929L7.58579 9L4.29289 5.70711L3.58579 5L5 3.58579L5.70711 4.29289L9 7.58579L12.2929 4.29289L13 3.58579L14.4142 5L13.7071 5.70711L10.4142 9L13.7071 12.2929L14.4142 13L13 14.4142L12.2929 13.7071L9 10.4142L5.70711 13.7071L5 14.4142L3.58579 13Z"
+              fill={color["declined"]}
+            />
+          </svg>{trip.bookedPassengers.filter(book=> {return book.status==="declined"}).length} declined</p>
+          <p className="flex flex-row gap-4"><svg
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M9 18C13.9706 18 18 13.9706 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18ZM8.76822 12.6402L13.7682 6.64018L12.2318 5.35982L7.9328 10.5186L5.70711 8.29289L4.29289 9.70711L7.29289 12.7071L8.0672 13.4814L8.76822 12.6402Z"
+              fill={color["approved"]}
+            />
+          </svg>{trip.bookedPassengers.filter(book=> {return book.status==="approved"}).length} approved</p>
 
           <select value={trip.tripStatus} onChange={(e)=> updateTrip(e,"tripStatus")}>
             <option value="departed">Departed</option>

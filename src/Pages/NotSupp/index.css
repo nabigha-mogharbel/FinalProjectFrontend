@@ -1,0 +1,19 @@
+.device-not-supported{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #f7f7f7;
+}
+.device-not-supported div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.device-not-supported h1{
+    font-size: 64px;
+    text-align: justify;
+}

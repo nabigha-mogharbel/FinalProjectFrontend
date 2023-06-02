@@ -10,7 +10,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import React, { createContext, useState, useEffect, useContext } from "react";
 import GenericFallback from "./Pages/404";
 import Home from "./Pages/Home";
-// import Nav from "./Components/WebNav/index"
+ import ScreenCheck from "./Components/screenCheck"
 import ManagerMain from "./Components/ManagerMain";
 import ManagerTrip from "./Components/ManagerTrip";
 import ManagerView from "./Pages/ManagerView";
@@ -29,6 +29,7 @@ import PassengerTrip from "./Components/PassengerTrip";
 import "./App.css";
 import PassengerSettings from "./Components/PassengerSettings";
 import { TokenContext, ColorPallete, colors } from "./context";
+import NotSupported from "./Pages/NotSupp";
 function App() {
   const navigate = useNavigate();
   const [isLogged, setLogged] = useState(false);
@@ -73,26 +74,32 @@ function App() {
             <Route
               path="/app/login"
               element={
+                <ScreenCheck>
                 <LoginSignup>
                   <Login />
                 </LoginSignup>
+                </ScreenCheck>
               }
             />
-            <Route path="/" element={<>Home</>} />
+            <Route path="/" element={<Home/>} />
             <Route
               path="/app/signup"
               element={
+                <ScreenCheck>
                 <LoginSignup>
                   <Signup />
                 </LoginSignup>
+                </ScreenCheck>
               }
             />
             <Route
               path="/app/passenger/"
               element={
+                <ScreenCheck>
                 <Authentication role="passenger">
                   <PassengerView />
                 </Authentication>
+                </ScreenCheck>
               }
             >
               <Route path="" element={<PassengerMain />} />
@@ -110,20 +117,22 @@ function App() {
               />
               <Route path="settings" element={<PassengerSettings />} />
             </Route>
-            <Route
+            {/* <Route
               path="/app/login"
               element={
                 <LoginSignup>
                   <Login />
                 </LoginSignup>
               }
-            />
+            /> */}
             <Route
               path="/app/manager/"
               element={
+                <ScreenCheck>
                 <Authentication role="manager">
                   <ManagerView />
                 </Authentication>
+                </ScreenCheck>
               }
             >
               <Route path="" element={<ManagerMain />} />
@@ -133,6 +142,7 @@ function App() {
               <Route path="settings" />
               <Route path="bookings/:tripId" element={<ManagerBookings />} />
             </Route>
+            <Route path="/device-not-supported" element={<NotSupported/>}/>
             <Route path="*" element={<GenericFallback />} />
           </Routes>
         </TokenContext.Provider>

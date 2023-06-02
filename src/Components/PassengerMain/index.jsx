@@ -30,6 +30,7 @@ function PassengerMain() {
   };
   return (
     <div className="tripList">
+      <h1>Upcoming Trips</h1>
       {!isLoading &&
         trips !== null &&
         trips.map((e) => {

@@ -110,7 +110,7 @@ pauseOnFocusLoss
 draggable
 pauseOnHover
 theme="light"
-/>              <p>batata helwe: {errors}</p>
+/>         
             {errorPhone && <p className='formerror'>* Phone number is required</p>}
             <label htmlFor='phone'>Phone Number<sup>*</sup></label>
             {!errorPhone &&<Input onChange={(e)=>setFormData(e, "phone")} value={form.phone} name="phone"  id="phone" placeholder='Enter Your Phone Number'/>}
@@ -120,8 +120,8 @@ theme="light"
             <label htmlFor='password'>Password<sup>*</sup></label>
             {!errorPassword && <Input type="password" onChange={(e)=>setFormData(e, "password")} value={form.password} placeholder="Enter Your Password" name="password" id="password"/>}
             {errorPassword && <Input type="password" $error onChange={(e)=>setFormData(e, "password")} value={form.password} placeholder="Enter Your Password" name="password" id="password"/>}
-            <Button type="submit">Login</Button>
-            <Link to="/app/signup">You don't have an account?</Link>
+            <Button type="submit" className="self-center">Login</Button>
+            <Link to="/app/signup" className="mt-2">You don't have an account?</Link>
         </form>
  );
 }

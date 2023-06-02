@@ -34,6 +34,9 @@ export const TokenContext=createContext(bb)
         'canceled': '#D68527',
         'scheduled': '#B3B3B3',
         'arrived': '#0270A9',
+        "approved": "#204E66",
+        "declined": "red",
+        "pending": "#EDC852"
 }
 export {colors}
 export const ColorPallete=createContext(colors)
