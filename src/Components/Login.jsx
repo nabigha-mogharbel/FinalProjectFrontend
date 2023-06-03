@@ -32,22 +32,25 @@ function Login(props) {
             toast.success(logging.data.message, {
                 position: "top-right",
                 autoClose: 3000,
-                hideProgressBar: false,
+                hideProgressBar: true,
                 closeOnClick: true,
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
                 theme: "light",
                 });
-                console.log("decoded token",decodeToken(logging.data.token))
-                if(decodeToken(logging.data.token).role==="manager"){navigate("/app/manager/")}
+                const nav=()=>{
+                    if(decodeToken(logging.data.token).role==="manager"){navigate("/app/manager/")}
                 else if(decodeToken(logging.data.token).role==="passenger"){navigate("/app/passenger/")}
+                }
+                setTimeout(nav, 3000)
+                
         }}catch(error){
             setError(error.message.data)
                 toast.error(error.message.data, {
                     position: "top-right",
                     autoClose: 3000,
-                    hideProgressBar: false,
+                    hideProgressBar: true,
                     closeOnClick: true,
                     pauseOnHover: true,
                     draggable: true,
@@ -121,7 +124,7 @@ theme="light"
             {!errorPassword && <Input type="password" onChange={(e)=>setFormData(e, "password")} value={form.password} placeholder="Enter Your Password" name="password" id="password"/>}
             {errorPassword && <Input type="password" $error onChange={(e)=>setFormData(e, "password")} value={form.password} placeholder="Enter Your Password" name="password" id="password"/>}
             <Button type="submit" className="self-center">Login</Button>
-            <Link to="/app/signup" className="mt-2">You don't have an account?</Link>
+            <Link to="/app/signup" className="mt-2 self-center" style={{textDecoration:"underline"}}>You don't have an account?</Link>
         </form>
  );
 }

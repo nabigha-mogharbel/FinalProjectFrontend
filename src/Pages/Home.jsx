@@ -14,7 +14,7 @@ function Home() {
     e.preventDefault()
     console.log(form.current)
     console.log(document.getElementById("contact-form"))
-    emailjs.sendForm("service_14fxwz5","template_hxz6t3k", form, "xirLPuZW7bbhp375b")
+    emailjs.sendForm("service_14fxwz5","template_hxz6t3k", form.current, "xirLPuZW7bbhp375b")
   }
     return ( 
     <div className="home">

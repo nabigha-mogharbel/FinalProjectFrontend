@@ -10,11 +10,11 @@ function LoginSignup({ children }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 2 }}
-      className="loginsignup"
+      className="loginsignup pt-8 pb-8"
     >
       <img src={logo} width="250"/>
 
-      <div className="formcontainer mt-16">{children}</div>
+      <div className="formcontainer mt-8">{children}</div>
     </motion.div>
   );
 }
