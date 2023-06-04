@@ -8,7 +8,7 @@ function TopNav() {
     let id= token? token.userId : false
     return (  <div className="topNav">
         <img src={tl} alt="logo" width="55"/>
-        <Avatar id={id}/>
+        <Avatar id={id} role={token.decoded.role}/>
         </div>);
 }
 

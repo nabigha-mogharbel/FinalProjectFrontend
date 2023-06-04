@@ -55,7 +55,7 @@ function PassengerLive() {
                   console.log(success.data.data)
                   let state=[]
                   success.data.data.map(e=>{
-                    if(e.tripStatus==="scheduled"){
+                    if(e.tripStatus==="departed"){
                       state.push(e)
                     }
                   })

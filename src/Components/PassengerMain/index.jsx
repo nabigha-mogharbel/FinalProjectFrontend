@@ -43,9 +43,9 @@ function PassengerMain() {
                 <Card key={e._id} $scheduled onClick={()=> navigate(`/app/passenger/trip/${e._id}`)}>
                   {" "}
                   <h3>{e.scheduleId.startLocation} {e.scheduleId.endLocation}</h3>
-                  <div className="time"><p>{st.getUTCHours()}:{st.getUTCMinutes()}</p> <p>{et.getUTCHours()}:{et.getUTCMinutes()}</p></div>
+                  <div className="time"><p>{st.getHours()}:{st.getMinutes()}</p> <p>{et.getHours()}:{et.getMinutes()}</p></div>
                   <div className="status">{e.tripStatus}</div>
-                  <p className="date">{date.getUTCDate()}{"-"}{date.getUTCMonth()+1}</p>
+                  <p className="date">{date.getDate()}{"-"}{date.getMonth()+1}</p>
                 </Card>
               );
             case "onboarding":
@@ -54,9 +54,9 @@ function PassengerMain() {
                 <Card key={e._id} $onboard onClick={()=> navigate(`/app/passenger/trip/${e._id}`)}>
                   {" "}
                   <h3>{e.scheduleId.startLocation} {e.scheduleId.endLocation}</h3>
-                  <div className="time"><p>{st.getUTCHours()}:{st.getUTCMinutes()}</p> <p>{et.getUTCHours()}:{et.getUTCMinutes()}</p></div>
+                  <div className="time"><p>{st.getHours()}:{st.getMinutes()}</p> <p>{et.getHours()}:{et.getMinutes()}</p></div>
                   <div className="status">{e.tripStatus}</div>
-                  <p className="date">{date.toISOString().substring(5, 10)}</p>
+                  <p className="date">{date.getDate()}{"-"}{date.getMonth()+1}</p>
                 </Card>
               );
             case "canceled":
@@ -67,7 +67,7 @@ function PassengerMain() {
                   <h3>{e.scheduleId.startLocation} {e.scheduleId.endLocation}</h3>
                   <div className="time"><p>{st.getUTCHours()}:{st.getUTCMinutes()}</p> <p>{et.getUTCHours()}:{et.getUTCMinutes()}</p></div>
                   <div className="status">{e.tripStatus}</div>
-                  <p className="date">{date.toISOString().substring(5, 10)}</p>
+                  <p className="date">{date.getDate()}{"-"}{date.getMonth()+1}</p>
                 </Card>
               );
             case "arrived":
@@ -75,9 +75,9 @@ function PassengerMain() {
                 <Card key={e._id} $arrived onClick={()=> navigate(`/app/passenger/trip/${e._id}`)}>
                   {" "}
                   <h3>{e.scheduleId.startLocation} {e.scheduleId.endLocation}</h3>
-                  <div className="time"><p>{st.getUTCHours()}:{st.getUTCMinutes()}</p> <p>{et.getUTCHours()}:{et.getUTCMinutes()}</p></div>
+                  <div className="time"><p>{st.getHours()}:{st.getMinutes()}</p> <p>{et.getHours()}:{et.getMinutes()}</p></div>
                   <div className="status">{e.tripStatus}</div>
-                  <p className="date">{date.toISOString().substring(5, 10)}</p>
+                  <p className="date">{date.getDate()}{"-"}{date.getMonth()+1}</p>
                 </Card>
               );
             case "departed":
@@ -85,9 +85,9 @@ function PassengerMain() {
                 <Card key={e._id} $departed onClick={()=> navigate(`/app/passenger/trip/${e._id}`)}>
                   {" "}
                   <h3>{e.scheduleId.startLocation} {e.scheduleId.endLocation}</h3>
-                  <div className="time"><p>{st.getUTCHours()}:{st.getUTCMinutes()}</p> <p>{et.getUTCHours()}:{et.getUTCMinutes()}</p></div>
+                  <div className="time"><p>{st.getHours()}:{st.getMinutes()}</p> <p>{et.getHours()}:{et.getMinutes()}</p></div>
                   <div className="status">{e.tripStatus}</div>
-                  <p className="date">{date.toISOString().substring(5, 10)}</p>
+                  <p className="date">{date.getDate()}{"-"}{date.getMonth()+1}</p>
                 </Card>
               );
               default:

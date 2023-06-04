@@ -1,10 +1,16 @@
 import { Link, useLocation } from "react-router-dom";
+import {useContext} from "react"
+import { TokenContext, ColorPallete } from "../../context";
+
 import "./index.css";
 const active = "#FCDA23";
 const inactive = "#f7f7f7";
 const bg = "#204e66";
 function BottomNav() {
+  let token = useContext(TokenContext);
   const location = useLocation();
+  console.log("btmn nav", token.decoded.role)
+  if(token.decoded.role==="passenger"){
   return (
     <div className="btmNav">
       <Link to="/app/passenger/">
@@ -17,10 +23,25 @@ function BottomNav() {
         <ScheduleLogo location={location} />
       </Link>{" "}
     </div>
-  );
+  );}
+  if(token.decoded.role==="manager"){
+    return (
+      <div className="btmNav">
+        <Link to="/app/manager/">
+          <HomeLogo location={location} />
+        </Link>
+        <Link to="/app/manager/live/all">
+          <LiveLogo location={location} />
+        </Link>
+        <Link to="/app/manager/schedule">
+          <ScheduleLogo location={location} />
+        </Link>{" "}
+      </div>
+    );}
+  
 }
 function HomeLogo({ location }) {
-  if (location.pathname === "/app/passenger/") {
+  if (location.pathname === "/app/passenger/"||location.pathname === "/app/manager/") {
     return (
       <svg
         width="34"
@@ -57,7 +78,7 @@ function HomeLogo({ location }) {
   }
 }
 function ScheduleLogo({ location }) {
-  if (location.pathname === "/app/passenger/schedule") {
+  if (location.pathname === "/app/passenger/schedule"||location.pathname === "/app/manager/schedule") {
     return (
       <svg
         width="36"
@@ -138,7 +159,7 @@ function ScheduleLogo({ location }) {
 function LiveLogo({ location }) {
   if (
     location.pathname === "/app/passenger/live" ||
-    location.pathname === "/app/passenger/live/trip"
+    location.pathname === "/app/passenger/live/trip" || location.pathname === "/app/manager/live"
   ) {
     return (
       <svg

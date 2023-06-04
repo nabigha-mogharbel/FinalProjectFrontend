@@ -136,8 +136,7 @@ function App() {
               <Route path="" element={<ManagerMain />} />
               <Route path="schedule" />
               <Route path="trip/:tripId" element={<ManagerTrip />} />
-              <Route path="live/:id" element={<ManagerLive />} />
-              <Route path="settings" />
+              <Route path="live/:tripId" element={<ManagerLive />} />
               <Route path="bookings/:tripId" element={<ManagerBookings />} />
             </Route>
             <Route path="/device-not-supported" element={<NotSupported/>}/>

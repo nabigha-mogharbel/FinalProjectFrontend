@@ -18,19 +18,22 @@ function PassengerMain() {
       const URL = process.env.REACT_APP_BASE_URL;
       // const URL="http://192.168.120.18:8000/"
       // const URL= env.API_URL
-      const trips = await axios.get(`${URL}app/trip/`, {"headers":{Authorization: `Bearer ${token.token}`}});
+      const trips = await axios.get(`${URL}app/trip/sched/upcoming`, {"headers":{Authorization: `Bearer ${token.token}`}});
       console.log(trips);
-      if (trips.status === 200) {
+      if (trips.status === 200||trips.status===304) {
         setTrips(trips.data.data);
         setLoading(false);
+      }else{
+        setLoading(false)
+        setTrips(null)
       }
     } catch (error) {
       console.log(error);
     }
   };
   return (
-    <div className="tripList">
-      Managerrrrrrr
+    <div className="tripList w-11/12">
+            <h1 className="pb-2 border-b-2 border-gray-300">Upcoming Trips</h1>
       {!isLoading &&
         trips !== null &&
         trips.map((e) => {
@@ -45,7 +48,7 @@ function PassengerMain() {
                   <h3>{e.scheduleId.startLocation} {e.scheduleId.endLocation}</h3>
                   <div className="time"><p>{st.getHours()}:{st.getMinutes()}</p> <p>{et.getHours()}:{et.getMinutes()}</p></div>
                   <div className="status">{e.tripStatus}</div>
-                  <p className="date">{date.toISOString().substring(5, 10)}</p>
+                  <p className="date">{date.getDate()}{"-"}{date.getMonth()+1}</p>
                 </Card>
               );
             case "onboarding":
@@ -56,7 +59,7 @@ function PassengerMain() {
                   <h3>{e.scheduleId.startLocation} {e.scheduleId.endLocation}</h3>
                   <div className="time"><p>{st.getHours()}:{st.getMinutes()}</p> <p>{et.getHours()}:{et.getMinutes()}</p></div>
                   <div className="status">{e.tripStatus}</div>
-                  <p className="date">{date.toISOString().substring(5, 10)}</p>
+                  <p className="date">{date.getDate()}{"-"}{date.getMonth()+1}</p>
                 </Card>
               );
             case "canceled":
@@ -67,7 +70,7 @@ function PassengerMain() {
                   <h3>{e.scheduleId.startLocation} {e.scheduleId.endLocation}</h3>
                   <div className="time"><p>{st.getHours()}:{st.getMinutes()}</p> <p>{et.getHours()}:{et.getMinutes()}</p></div>
                   <div className="status">{e.tripStatus}</div>
-                  <p className="date">{date.toISOString().substring(5, 10)}</p>
+                  <p className="date">{date.getDate()}{"-"}{date.getMonth()+1}</p>
                 </Card>
               );
             case "arrived":
@@ -77,7 +80,7 @@ function PassengerMain() {
                   <h3>{e.scheduleId.startLocation} {e.scheduleId.endLocation}</h3>
                   <div className="time"><p>{st.getHours()}:{st.getMinutes()}</p> <p>{et.getHours()}:{et.getMinutes()}</p></div>
                   <div className="status">{e.tripStatus}</div>
-                  <p className="date">{date.toISOString().substring(5, 10)}</p>
+                  <p className="date">{date.getDate()}{"-"}{date.getMonth()+1}</p>
                 </Card>
               );
             case "departed":
@@ -87,7 +90,7 @@ function PassengerMain() {
                   <h3>{e.scheduleId.startLocation} {e.scheduleId.endLocation}</h3>
                   <div className="time"><p>{st.getHours()}:{st.getMinutes()}</p> <p>{et.getHours()}:{et.getMinutes()}</p></div>
                   <div className="status">{e.tripStatus}</div>
-                  <p className="date">{date.toISOString().substring(5, 10)}</p>
+                  <p className="date">{date.getDate()}{"-"}{date.getMonth()+1}</p>
                 </Card>
               );
               default:

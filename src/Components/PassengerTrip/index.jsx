@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext, useRef } from "react";
 import axios from "axios";
-import { Card, Button, Status,TripTag } from "../Styled";
+import { Card, Button, Status, TripTag } from "../Styled";
 import Loader from "../Loading";
 import { io } from "socket.io-client";
 import map from "../../Images/map.webp";
@@ -25,8 +25,7 @@ function PassengerTrip() {
     // const SOCKET = "http://192.168.120.18:5000/";
     let socket = io(SOCKET);
     socket.on("tripWatching", (args) => {
-      setTrip(args.fullDocument)
-     
+      setTrip(args.fullDocument);
     });
   }, [booked]);
 
@@ -73,9 +72,9 @@ function PassengerTrip() {
       if (result.isConfirmed) {
         handleBooking();
       } else if (result.isDenied) {
-        Swal.fire('Changes are not saved', '', 'info')
+        Swal.fire("Changes are not saved", "", "info");
       }
-    })
+    });
   };
   const handleBooking = async () => {
     // const URL = "http://192.168.120.18:5000/";
@@ -103,84 +102,60 @@ function PassengerTrip() {
     navigate(`/app/passenger/live/trip/${tripId.tripId}`);
   };
   return (
-    <div className="tripList">
-    
+    <div className="tripList w-11/12">
       {!isLoading && trip !== null && (
         <>
-        <div className="flex justify-start items-start gap-8 trip-header">
-        <Button className="">
-        <Link to="/app/passenger/">
-          <svg
-            width="15"
-            height="10"
-            viewBox="0 0 15 10"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M2 5L1.29289 4.29289L0.585786 5L1.29289 5.70711L2 5ZM14 6C14.5523 6 15 5.55228 15 5C15 4.44772 14.5523 4 14 4V6ZM5.29289 0.292893L1.29289 4.29289L2.70711 5.70711L6.70711 1.70711L5.29289 0.292893ZM1.29289 5.70711L5.29289 9.70711L6.70711 8.29289L2.70711 4.29289L1.29289 5.70711ZM2 6H14V4H2V6Z"
-              fill="#f7f7f7"
-            />
-          </svg>
-        </Link>
-      </Button>
-      <div className="flex gap-2">
-        <h1 className="flex justify-between gap-2 p-0 m-0">
-              {trip.scheduleId.startLocation} {trip.scheduleId.endLocation}
-
-              {/* <svg
-                width="15"
-                height="10"
-                viewBox="0 0 15 10"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g clip-path="url(#clip0_2067_19)">
+          <div className="flex justify-start items-start gap-8 trip-header">
+            <Button className="">
+              <Link to="/app/passenger/">
+                <svg
+                  width="15"
+                  height="10"
+                  viewBox="0 0 15 10"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <path
-                    d="M13 4.99995L13.7071 4.29284L14.4142 4.99995L13.7071 5.70706L13 4.99995ZM0.99997 5.99995C0.44767 5.99995 -2.95639e-05 5.55223 -2.95639e-05 4.99995C-2.95639e-05 4.44767 0.44767 3.99995 0.99997 3.99995V5.99995ZM9.70708 0.292847L13.7071 4.29284L12.2929 5.70706L8.29286 1.70706L9.70708 0.292847ZM13.7071 5.70706L9.70708 9.70706L8.29286 8.29284L12.2929 4.29284L13.7071 5.70706ZM13 5.99995H0.99997V3.99995H13V5.99995Z"
-                    fill="#33363F"
+                    d="M2 5L1.29289 4.29289L0.585786 5L1.29289 5.70711L2 5ZM14 6C14.5523 6 15 5.55228 15 5C15 4.44772 14.5523 4 14 4V6ZM5.29289 0.292893L1.29289 4.29289L2.70711 5.70711L6.70711 1.70711L5.29289 0.292893ZM1.29289 5.70711L5.29289 9.70711L6.70711 8.29289L2.70711 4.29289L1.29289 5.70711ZM2 6H14V4H2V6Z"
+                    fill="#f7f7f7"
                   />
-                </g>
-                <defs>
-                  <clipPath id="clip0_2067_19">
-                    <rect
-                      width="15"
-                      height="10"
-                      fill="white"
-                      transform="matrix(-1 0 0 1 15 0)"
-                    />
-                  </clipPath>
-                </defs>
-              </svg> */}
-
-            </h1>
-            <div className="flex flex-column justify-start gap-2">
-              <State2 state={trip.tripStatus} text={trip.tripStatus} />{" "}
+                </svg>
+              </Link>
+            </Button>
+            <div className="flex gap-2">
+              <h1 className="flex justify-between gap-2 p-0 m-0">
+                {trip.scheduleId.startLocation} {trip.scheduleId.endLocation}
+              </h1>
+              <div className="flex flex-column justify-start gap-2">
+                <State2 state={trip.tripStatus} text={trip.tripStatus} />{" "}
+              </div>
             </div>
-            </div>
-            </div>
+          </div>
           <img src={map} alt="map" />
 
           <div className=" flex flex-column align-start w-11/12">
             <div className="flex justify-between gap-4 mt-2 pb-2">
-            <p> <span>Depart Time: </span> {" "}
-                  <span className="trial-time">{new Date(trip.startTime).getUTCHours()}:
-                  {new Date(trip.startTime).getUTCMinutes()}</span>
-                </p>
-                <p> <span>Arrival Time: </span>{" "}
-                <span className="trial-time">{new Date(trip.endTime).getUTCHours()}:
-                  {new Date(trip.endTime).getUTCMinutes()}</span>
-                </p>
+              <p>
+                {" "}
+                <span>Depart Time: </span>{" "}
+                <span className="trial-time">
+                  {new Date(trip.startTime).getHours()}:
+                  {new Date(trip.startTime).getMinutes()}
+                </span>
+              </p>
+              <p>
+                {" "}
+                <span>Arrival Time: </span>{" "}
+                <span className="trial-time">
+                  {new Date(trip.endTime).getHours()}:
+                  {new Date(trip.endTime).getMinutes()}
+                </span>
+              </p>
             </div>
-           <span className="mt-2">Bus: {trip.message}</span>{" "}         
-            <p className="mt-2  pb-2 border-b-2 border-gray-300"><span>Available Seats:</span>{" "}{trip.emptySeats}</p>
-
-            
-            
-
-            
-          
-
+            <span className="mt-2">Bus: {trip.message}</span>{" "}
+            <p className="mt-2  pb-2 border-b-2 border-gray-300">
+              <span>Available Seats:</span> {trip.emptySeats}
+            </p>
             <div className="flex flex-row justify-center gap-4 pt-4">
               {trip.emptySeats > 0 && !booked && (
                 <Button onClick={toggleBookingPrompt}>Book a seat</Button>
@@ -249,35 +224,15 @@ const State = ({ state, text }) => {
 const State2 = ({ state, text }) => {
   switch (state) {
     case "departed":
-      return (
-        <TripTag $departed>
-          {text}
-        </TripTag>
-      );
+      return <TripTag $departed>{text}</TripTag>;
     case "arrived":
-      return (
-        <Status $arrived>
-          {text}
-        </Status>
-      );
+      return <Status $arrived>{text}</Status>;
     case "onboarding":
-      return (
-        <Status $onboarding>
-          {text}
-        </Status>
-      );
+      return <Status $onboarding>{text}</Status>;
     case "scheduled":
-      return (
-        <TripTag $scheduled>
-          {text}
-        </TripTag>
-      );
+      return <TripTag $scheduled>{text}</TripTag>;
     case "canceled":
-      return (
-        <Status $canceled>
-          {text}
-        </Status>
-      );
+      return <Status $canceled>{text}</Status>;
   }
 };
 const Book = ({ state, color }) => {

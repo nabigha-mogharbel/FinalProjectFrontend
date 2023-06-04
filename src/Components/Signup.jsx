@@ -1,11 +1,11 @@
-import {useState, useEffect} from "react"
+import {useState, useEffect, useRef} from "react"
 import axios from "axios"
 import {Button, Input} from "./Styled"
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate, Link } from "react-router-dom"
 function Signup() {
     const navigate = useNavigate();
-
+    const toastId = useRef(null);
     const [form, setForm]=useState({
         firstName:"",
         lastName:"",
@@ -19,6 +19,7 @@ function Signup() {
     const [errorFN, setErrorFN]=useState(false)
     const [errorLN, setErrorLN]=useState(false)
     const [errorMatchPass, setErrorMatchPass]=useState(false)
+    const [wait,setWait]=useState(false)
     useEffect(()=>{ if(form.password!==repass){
         setErrorMatchPass(true)
     }
@@ -26,9 +27,53 @@ function Signup() {
         setErrorMatchPass(false)
     }}, [repass])
     const signup=async(body)=>{
+        if(wait){return toast.warning("please wait", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            }); }
+        else{
         const URL=process.env.REACT_APP_BASE_URL;
-        const logging=await axios.post(`${URL}app/auth/register`,body)
-        toast.success("account created", {
+      try{axios.post(`${URL}app/auth/register`,body).then(
+        function(s){
+            console.log(s)
+            toast.success(`${s.data.message}`, {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
+            const nav=()=>{
+                if(s.status===201){
+                    navigate("/app/login")
+                }
+            }
+            setTimeout(nav, 3000)
+        }, function(r){
+            toast.error(`${r.data.message}`, {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
+                setWait(false)
+        }
+      )
+    }catch(error){
+        toast.error("please check your internet", {
             position: "top-right",
             autoClose: 3000,
             hideProgressBar: true,
@@ -38,12 +83,8 @@ function Signup() {
             progress: undefined,
             theme: "light",
             });
-        const nav=()=>{
-            if(logging.status===201){
-                navigate("/app/login")
-            }
-        }
-        setTimeout(nav, 3000)
+            setWait(false)
+    }}
 
     }
     const submitSignup= (e)=>{
