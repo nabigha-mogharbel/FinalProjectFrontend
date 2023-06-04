@@ -43,7 +43,7 @@ function PassengerMain() {
                 <Card key={e._id} $scheduled onClick={()=> navigate(`/app/manager/trip/${e._id}`)}>
                   {" "}
                   <h3>{e.scheduleId.startLocation} {e.scheduleId.endLocation}</h3>
-                  <div className="time"><p>{st.getUTCHours()}:{st.getUTCMinutes()}</p> <p>{et.getUTCHours()}:{et.getUTCMinutes()}</p></div>
+                  <div className="time"><p>{st.getHours()}:{st.getMinutes()}</p> <p>{et.getHours()}:{et.getMinutes()}</p></div>
                   <div className="status">{e.tripStatus}</div>
                   <p className="date">{date.toISOString().substring(5, 10)}</p>
                 </Card>
@@ -54,7 +54,7 @@ function PassengerMain() {
                 <Card key={e._id} $onboard onClick={()=> navigate(`/app/manager/trip/${e._id}`)}>
                   {" "}
                   <h3>{e.scheduleId.startLocation} {e.scheduleId.endLocation}</h3>
-                  <div className="time"><p>{st.getUTCHours()}:{st.getUTCMinutes()}</p> <p>{et.getUTCHours()}:{et.getUTCMinutes()}</p></div>
+                  <div className="time"><p>{st.getHours()}:{st.getMinutes()}</p> <p>{et.getHours()}:{et.getMinutes()}</p></div>
                   <div className="status">{e.tripStatus}</div>
                   <p className="date">{date.toISOString().substring(5, 10)}</p>
                 </Card>
@@ -65,7 +65,7 @@ function PassengerMain() {
                 <Card key={e._id} $canceled onClick={()=> navigate(`/app/manager/trip/${e._id}`)}>
                   {" "}
                   <h3>{e.scheduleId.startLocation} {e.scheduleId.endLocation}</h3>
-                  <div className="time"><p>{st.getUTCHours()}:{st.getUTCMinutes()}</p> <p>{et.getUTCHours()}:{et.getUTCMinutes()}</p></div>
+                  <div className="time"><p>{st.getHours()}:{st.getMinutes()}</p> <p>{et.getHours()}:{et.getMinutes()}</p></div>
                   <div className="status">{e.tripStatus}</div>
                   <p className="date">{date.toISOString().substring(5, 10)}</p>
                 </Card>
@@ -75,7 +75,7 @@ function PassengerMain() {
                 <Card key={e._id} $arrived onClick={()=> navigate(`/app/manager/trip/${e._id}`)}>
                   {" "}
                   <h3>{e.scheduleId.startLocation} {e.scheduleId.endLocation}</h3>
-                  <div className="time"><p>{st.getUTCHours()}:{st.getUTCMinutes()}</p> <p>{et.getUTCHours()}:{et.getUTCMinutes()}</p></div>
+                  <div className="time"><p>{st.getHours()}:{st.getMinutes()}</p> <p>{et.getHours()}:{et.getMinutes()}</p></div>
                   <div className="status">{e.tripStatus}</div>
                   <p className="date">{date.toISOString().substring(5, 10)}</p>
                 </Card>
@@ -85,7 +85,7 @@ function PassengerMain() {
                 <Card key={e._id} $departed onClick={()=> navigate(`/app/manager/trip/${e._id}`)}>
                   {" "}
                   <h3>{e.scheduleId.startLocation} {e.scheduleId.endLocation}</h3>
-                  <div className="time"><p>{st.getUTCHours()}:{st.getUTCMinutes()}</p> <p>{et.getUTCHours()}:{et.getUTCMinutes()}</p></div>
+                  <div className="time"><p>{st.getHours()}:{st.getMinutes()}</p> <p>{et.getHours()}:{et.getMinutes()}</p></div>
                   <div className="status">{e.tripStatus}</div>
                   <p className="date">{date.toISOString().substring(5, 10)}</p>
                 </Card>

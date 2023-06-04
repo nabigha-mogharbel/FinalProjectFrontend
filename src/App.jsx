@@ -15,6 +15,7 @@ import ManagerMain from "./Components/ManagerMain";
 import ManagerTrip from "./Components/ManagerTrip";
 import ManagerView from "./Pages/ManagerView";
 import LoginSignup from "./Pages/LoginSignup";
+import PassengerAllLive from "./Components/PassengerAllLive"
 import PassengerLive from "./Components/PassengerLive";
 import Login from "./Components/Login";
 import ManagerBookings from "./Components/ManagerBookings";
@@ -109,10 +110,7 @@ function App() {
               <Route
                 path="live/"
                 element={
-                  <>
-                    drop down to see which trips are live. choose one to see its
-                    live location
-                  </>
+                  <PassengerAllLive/>
                 }
               />
               <Route path="settings" element={<PassengerSettings />} />

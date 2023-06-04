@@ -20,6 +20,13 @@ export const Button = styled.button`
       }
     `};
     ${(props) =>
+    props.$warning &&
+    css`
+    background: red;
+    color:#f7f7f7;
+      }
+    `};
+    ${(props) =>
       props.$yellow &&
       css`
       background: var(--yellow-d);
@@ -48,6 +55,45 @@ export const Button = styled.button`
             background: transparent;
             color: var(--red);
             border: 1px solid var(--red);
+              }
+            `};
+`;
+export const TripTag = styled.div`
+  border-radius: 2px;
+  font-size:12px;
+  border:transparent;
+  color: var(--white);
+  padding: 4px;
+  border-radius:4px;
+
+  ${(props) =>
+    props.$scheduled &&
+    css`
+    background: var(--gray-d);
+      }
+    `};
+    ${(props) =>
+      props.$onboarding &&
+      css`
+      background-color: var(--yellow-d);
+        }
+      `};
+      ${(props) =>
+        props.$canceled &&
+        css`
+        background-color: var(--orange-d);
+          }
+        `};
+        ${(props) =>
+          props.$arrived &&
+          css`
+          border: 1px solid var(--blue-d);
+            }
+          `};
+          ${(props) =>
+            props.$departed &&
+            css`
+            background-color: var(--green-d);
               }
             `};
 `;

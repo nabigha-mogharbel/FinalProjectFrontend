@@ -1,3 +1,14 @@
 h1{
     font-size: 24px;
 }
+.trip-header{
+    width:100%;
+}
+.trial-time{
+    background-color: var(--green-l);
+    font-weight: 600;
+    padding:12px 8px;
+    border-radius: 6px;
+    display: inline-block;
+
+}

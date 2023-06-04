@@ -113,12 +113,12 @@ function PassengerTrip() {
            */}
            <Status dolla={trip.tripStatus}><div className="status">{trip.tripStatus}</div></Status>
           <p>
-            {new Date(trip.scheduleId.startTime).getUTCHours()}:
-            {new Date(trip.scheduleId.startTime).getUTCMinutes()}
+            {new Date(trip.scheduleId.startTime).getHours()}:
+            {new Date(trip.scheduleId.startTime).getMinutes()}
           </p>
           <p>
-            {new Date(trip.scheduleId.endTime).getUTCHours()}:
-            {new Date(trip.scheduleId.endTime).getUTCMinutes()}
+            {new Date(trip.scheduleId.endTime).getHours()}:
+            {new Date(trip.scheduleId.endTime).getMinutes()}
           </p>
           
           <p className="flex flex-row gap-4">

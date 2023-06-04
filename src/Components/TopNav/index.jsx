@@ -1,7 +1,7 @@
 import "./index.css"
 import {TokenContext} from "../../context";
 import { useContext } from "react";
-import tl from "../../Images/tl.png"
+import tl from "../../Images/logo_s.svg"
 import Avatar from "../Avatar"
 function TopNav() {
     let token=useContext(TokenContext)

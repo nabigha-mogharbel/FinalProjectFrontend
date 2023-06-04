@@ -1,0 +1,14 @@
+.setting-container{
+    background-color: var(--green-l);
+    width:80%;
+    min-height: 100%;
+    margin-left:calc(100vw * 0.1);
+    border-radius:6px;
+    padding:32px;
+
+}
+.setting{
+    background-color: #f7f7f7;
+    min-height: 70vh;
+    width:100%;
+}
