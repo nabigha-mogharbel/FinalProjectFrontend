@@ -3,7 +3,12 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import logo from "../Images/logo_lg.svg"
 import "./index.css";
+import { Navigate } from "react-router-dom";
 function LoginSignup({ children }) {
+  useEffect(()=>{
+    if(window.innerWidth>680){return <Navigate to="/device-not-supported" />}
+    
+},[])
   return (
     <motion.div
       initial={{ opacity: 0 }}

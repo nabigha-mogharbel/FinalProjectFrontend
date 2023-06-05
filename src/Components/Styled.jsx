@@ -8,6 +8,7 @@ export const Button = styled.button`
   justify-content: space-around;
   column-gap: 6px;
   align-items: center;
+  height:fit-content;
   padding: 8px 6px;
   @media (max-width: 680px) {
     padding: 8px 12px;
