@@ -1,14 +1,15 @@
 import "./index.css";
 import { useEffect, useState, useRef, useMemo, useContext } from "react";
 import io from "socket.io-client";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import L, { LatLng } from "leaflet";
+import { Card } from "../Styled";
 import axios from "axios";
 import "leaflet/dist/leaflet.css";
 import throttle from "lodash/throttle";
 import iconDrop from "./marker-icon-2x.svg";
 import { TokenContext, ColorPallete } from "../../context";
-
+import Loader from "../Loading";
 import {
   MapContainer,
   TileLayer,
@@ -120,35 +121,61 @@ const THROTTLE_DELAY = 50;
 
 function ManagerLive() {
   let token = useContext(TokenContext);
-  const [trip, setTrip] = useState(null);
+  const [trip, setTrip] = useState([]);
   const [ballouta, setBallouta] = useState("");
   const [isLoading, setLoading] = useState(true);
   const [bookInfo, setBookInfo] = useState({});
-  const [initialValues, setInitialValues] = useState({
-    zoom: 15,
-    center: [34.43431, 35.835937],
-    scrollWheelZoom: true,
-  });
   const tripId = useParams();
+  const navigate = useNavigate();
+
   useEffect(() => {
     getTrip();
     setInterval(updateLocation, 10000);
-  }, [ballouta]);
+    if(tripId.tripId!=="all"){
+      let socket = io(process.env.REACT_APP_BASE_SOCKET);
+    socket.on("tripWatching", (args) => {
+      setTrip(args.fullDocument);
+
+    });
+    }
+  }, []);
 
   const getTrip = async () => {
     const URL = process.env.REACT_APP_BASE_URL;
+    let id = tripId.tripId;
+    if(id==="all"){
+      try {
+      
+        console.log("token", token.decoded);
+        axios
+          .get(`${URL}app/trip/`, {
+            headers: { Authorization: `Bearer ${token.token}` },
+          })
+          .then(
+            function (success) {
+              if (success.status === 200 || success.status === 304) {
+                let filtered=success.data.data.filter(e=> e.tripStatus==="departed")
+                setTrip(filtered);
+                setLoading(false);
+              }
+            },
+            function (reject) {}
+          );
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    else{
     try {
-      let id = tripId.tripId;
-      console.log("token", token.decoded);
-      axios
+            axios
         .get(`${URL}app/trip/trip/${id}`, {
           headers: { Authorization: `Bearer ${token.token}` },
         })
         .then(
           function (success) {
             if (success.status === 200 || success.status === 304) {
-              console.log(success.data.data[0], "ywowow");
-              setTrip(success.data.data[0]);
+             if( success.data.data[0].busManagerId._id===token.decoded.userId && success.data.data[0].tripStatus==="departed")
+              setTrip(success.data.data);
               setLoading(false);
             }
           },
@@ -156,16 +183,15 @@ function ManagerLive() {
         );
     } catch (error) {
       console.log(error);
-    }
+    }}
   };
   const updateLocation = () => {
     navigator.geolocation.getCurrentPosition(function (position) {
-      console.log("Latitude is :", position.coords.latitude);
-      console.log("Longitude is :", position.coords.longitude);
+
       if (!isLoading) {
         if (
-          trip.lat.numberDecimal !== toString(position.coords.latitude) ||
-          trip.lat.numberDecimal !== toString(position.coords.latitude)
+          trip[0].lat.$numberDecimal !== toString(position.coords.latitude) ||
+          trip[0].lat.$numberDecimal !== toString(position.coords.latitude)
         ) {
           axios
             .put(`${process.env.REACT_APP_BASE_URL}app/trip/${tripId.tripId}`, {
@@ -173,13 +199,25 @@ function ManagerLive() {
               lon: position.coords.longitude,
             })
             .then(function (s) {
-              setBallouta(new Date().toISOString());
             });
         }
       }
     }, function(lolo){console.log(lolo)}, { enableHighAccuracy: true });
   };
-
-  return <>{tripId.tripId}</>;
+  if(tripId.tripId==="all"){return <div className="w-11/12">
+    <h1>Departing Trips</h1>
+    {trip.map(e=> {
+    let st=new Date(e.scheduleId.startTime)
+          let et=new Date(e.scheduleId.endTime)
+          let date=new Date(e.date)
+    return <Card key={e._id} $departed onClick={()=> navigate(`/app/manager/live/${e._id}`)}>
+  {" "}
+  <h3>{e.scheduleId.startLocation} {e.scheduleId.endLocation}</h3>
+  <div className="time"><p>{st.getHours()}:{st.getMinutes()}</p> <p>{et.getHours()}:{et.getMinutes()}</p></div>
+  <div className="status">{e.tripStatus}</div>
+  <p className="date">{date.getDate()}{"-"}{date.getMonth()+1}</p>
+</Card>})}</div>}
+  else{return <>{!isLoading&&trip.length===0 && <p>No trip</p>}{!isLoading&&trip.length>0 && <p>yay</p>}
+  {isLoading && <Loader />}</>;}
 }
 export default ManagerLive;

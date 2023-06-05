@@ -4,14 +4,14 @@ export const Button = styled.button`
   background: var(--green-d);
   border-radius: 6px;
   color: var(--white);
-  display:flex;
-  justify-content:space-around;
+  display: flex;
+  justify-content: space-around;
   column-gap: 6px;
-  align-items:center;
+  align-items: center;
   padding: 8px 6px;
-  @media (max-width:680px){
-    padding:8px  12px;
-  };
+  @media (max-width: 680px) {
+    padding: 8px 12px;
+  }
   ${(props) =>
     props.$white &&
     css`
@@ -19,39 +19,39 @@ export const Button = styled.button`
     color: var(--green-d);
       }
     `};
-    ${(props) =>
+  ${(props) =>
     props.$warning &&
     css`
     background: red;
     color:#f7f7f7;
       }
     `};
-    ${(props) =>
-      props.$yellow &&
-      css`
+  ${(props) =>
+    props.$yellow &&
+    css`
       background: var(--yellow-d);
       color: black;
         }
       `};
-      ${(props) =>
-        props.$pending &&
-        css`
+  ${(props) =>
+    props.$pending &&
+    css`
         background: transparent;
         color: var(--yellow-d);
         border: 1px solid var(--yellow-d);
           }
         `};
-        ${(props) =>
-          props.$approved &&
-          css`
+  ${(props) =>
+    props.$approved &&
+    css`
           background: transparent;
           color: var(--green-d);
           border: 1px solid var(--green-d);
             }
           `};
-          ${(props) =>
-            props.$declined &&
-            css`
+  ${(props) =>
+    props.$declined &&
+    css`
             background: transparent;
             color: var(--red);
             border: 1px solid var(--red);
@@ -60,11 +60,11 @@ export const Button = styled.button`
 `;
 export const TripTag = styled.div`
   border-radius: 2px;
-  font-size:12px;
-  border:transparent;
+  font-size: 12px;
+  border: transparent;
   color: var(--white);
   padding: 4px;
-  border-radius:4px;
+  border-radius: 4px;
 
   ${(props) =>
     props.$scheduled &&
@@ -72,51 +72,48 @@ export const TripTag = styled.div`
     background: var(--gray-d);
       }
     `};
-    ${(props) =>
-      props.$onboarding &&
-      css`
+  ${(props) =>
+    props.$onboarding &&
+    css`
       background-color: var(--yellow-d);
         }
       `};
-      ${(props) =>
-        props.$canceled &&
-        css`
+  ${(props) =>
+    props.$canceled &&
+    css`
         background-color: var(--orange-d);
           }
         `};
-        ${(props) =>
-          props.$arrived &&
-          css`
+  ${(props) =>
+    props.$arrived &&
+    css`
           border: 1px solid var(--blue-d);
             }
           `};
-          ${(props) =>
-            props.$departed &&
-            css`
+  ${(props) =>
+    props.$departed &&
+    css`
             background-color: var(--green-d);
               }
             `};
 `;
-export const MenuItem=styled.button`
-    color: var(--green-d);
-    width:80px;
-    padding: 8px 6px;
-    ${(props) =>
-      props.$yellow &&
-      css`
+export const MenuItem = styled.button`
+  color: var(--green-d);
+  width: 80px;
+  padding: 8px 6px;
+  ${(props) =>
+    props.$yellow &&
+    css`
       color: var(--yellow-d);
         }
-      `
-      };
-      ${(props) =>
-        props.$red &&
-        css`
+      `};
+  ${(props) =>
+    props.$red &&
+    css`
         color: var(--red-d);
           }
-        `
-        };
-
-`
+        `};
+`;
 export const Input = styled.input`
   width: 100%;
   border: solid 1px var(--green-l);
@@ -143,11 +140,6 @@ export const Card = styled.div`
   width: 100%;
   height:150px;
   box-sizing:border-box;
-  // border-radius: 50px 10px 10px 100px;
-  linear-gradient(45deg, var(--green), var(--green-l));
-  // border-radius: 10px;
-  // padding: 8px 8px 8px 24px;
-  // box-shadow: 3px 2px 4px 2px var(--gray-cc);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
@@ -193,50 +185,50 @@ export const Card = styled.div`
   ${(props) =>
     props.$onboard &&
     css`
-      .status::before {background-color:var(--yellow-d)}
-      & {
+      & .status::before {background-color:var(--yellow-d)}
+ 
         background-color: var(--yellow-l)}
-      }
+      
     `};
   ${(props) =>
     props.$canceled &&
     css`
-    status::before {background-color:var(--orange-d)}
-      & {
-        background-color;var(--orange-l)}
-      }
+    & .status::before {background-color:var(--orange-d)}
+    background-color:var(--orange-l)}
+  
 
     `};
   ${(props) =>
     props.$scheduled &&
     css`
-    &{
-    background-color:var(--gray-l);}
-    & .status::before{
-      background-color:var(--gray-d);
-    }
-
+        background-color: var(--gray-l);
+       & .status::before{ background-color: var(--gray-d);}
+      
     `};
   ${(props) =>
     props.$departed &&
     css`
-    .status::before {background-color:var(--green-d);}
-    &{
-      background-color:var(--green-l);
-      background:linear-gradient(45deg, var(--green-l), var(--green-d));
-      background:linear-gradient(185deg, #cbd5d9, #8fa5ae);
-}
-
+      & .status::before {
+        background-color: var(--green-d);
+      }
+     
+        background-color: var(--green-l);
+        background: linear-gradient(45deg, var(--green-l), var(--green-d));
+        background: linear-gradient(185deg, #cbd5d9, #8fa5ae);
+      
     `};
   ${(props) =>
     props.$arrived &&
     css`
-    .status::before {background-color:var(--blue-d);}
-    &{background-color:var(--blue-l)}
-
+      .status::before {
+        background-color: var(--blue-d);
+      }
+      & {
+        background-color: var(--blue-l);
+      }
     `};
 `;
-export const Status=styled.div`
+export const Status = styled.div`
 & .status{
   font-size:18px;
   text-transform:capitalize;
@@ -250,37 +242,46 @@ export const Status=styled.div`
   border-radius:50%;
 }
 ${(props) =>
-    props.dolla==="departed" &&
-    css`
-      .status::before {background-color:var(--yellow-d)}
-    `};
+  props.dolla === "departed" &&
+  css`
+    .status::before {
+      background-color: var(--yellow-d);
+    }
+  `};
   ${(props) =>
     props.$onboarding &&
     css`
-      .status::before {background-color:var(--yellow-d)}
+      .status::before {
+        background-color: var(--yellow-d);
+      }
     `};
   ${(props) =>
     props.$canceled &&
     css`
-    status::before {background-color:var(--orange-d)}
+      status::before {
+        background-color: var(--orange-d);
+      }
     `};
   ${(props) =>
     props.$scheduled &&
     css`
-    &{
-    background-color:var(--gray-l);}
+      & {
+        background-color: var(--gray-l);
+      }
     `};
   ${(props) =>
     props.$departed &&
     css`
-    .status::before{
-      background-color:var(--green-d);
-    }
+      .status::before {
+        background-color: var(--green-d);
+      }
     `};
   ${(props) =>
     props.$arrived &&
     css`
-    .status::before {background-color:var(--blue-d);}
+      .status::before {
+        background-color: var(--blue-d);
+      }
     `};
 }
-`
+`;

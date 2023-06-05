@@ -52,6 +52,7 @@ function App() {
   useEffect(() => {
     checkToken();
   }, [navigate, location]);
+ 
   const checkToken = () => {
     const Cookie = new Cookies();
     let token = Cookie.get("token");

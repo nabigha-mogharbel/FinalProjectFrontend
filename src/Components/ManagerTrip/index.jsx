@@ -23,6 +23,7 @@ function PassengerTrip() {
   useEffect(() => {
     getTrip();
     const SOCKET = process.env.REACT_APP_BASE_SOCKET;
+    console.log(SOCKET)
     let socket = io(SOCKET);
     socket.on("tripWatching", (args) => {
       // let batata = { ...args };
@@ -45,7 +46,7 @@ function PassengerTrip() {
     const URL = process.env.REACT_APP_BASE_URL;
     try {
       let id = tripId.tripId;
-      console.log("token", token.decoded);
+      console.log("tokedddn", token.decoded);
       axios
         .get(`${URL}app/trip/trip/${id}`, {
           headers: { Authorization: `Bearer ${token.token}` },

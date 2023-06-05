@@ -44,18 +44,20 @@ function PassengerLive() {
     // const SOCKET = "http://192.168.120.18:5000/";
     let socket = io(SOCKET);
     socket.on("tripWatching", (args) => {
-      let batata = { ...args };
-      console.log("batataaaaaa", batata);
-      if (batata) {
-        if (batata.documentKey._id === tripId.tripId) {
-          const arg = batata["updateDescription"]["updatedFields"];
-          delete arg.scheduleId;
-          console.log(arg);
-          let cc = { ...trip, ...arg };
-          console.log("bobo", cc);
-          setTrip(cc);
-        }
-      }
+      // let batata = { ...args };
+      // console.log("batataaaaaa", batata);
+      // if (batata) {
+      //   if (batata.documentKey._id === tripId.tripId) {
+      //     const arg = batata["updateDescription"]["updatedFields"];
+      //     delete arg.scheduleId;
+      //     console.log(arg);
+      //     let cc = { ...trip, ...arg };
+      //     console.log("bobo", cc);
+      //     setTrip(cc);
+      //   }
+      // }
+      setTrip(args.fullDocument);
+
     });
     }, [])
    
