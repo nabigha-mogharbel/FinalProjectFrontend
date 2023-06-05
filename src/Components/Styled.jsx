@@ -8,56 +8,56 @@ export const Button = styled.button`
   justify-content: space-around;
   column-gap: 6px;
   align-items: center;
-  height:fit-content;
+  height: fit-content;
   padding: 8px 6px;
+  & a:hover {
+    color: black;
+  }
   @media (max-width: 680px) {
     padding: 8px 12px;
   }
   ${(props) =>
     props.$white &&
     css`
-    background: var(--white);
-    color: var(--green-d);
-      }
+      background: var(--white);
+      color: var(--green-d);
     `};
   ${(props) =>
     props.$warning &&
     css`
-    background: red;
-    color:#f7f7f7;
-      }
+      background: red;
+      color: #f7f7f7;
     `};
   ${(props) =>
     props.$yellow &&
     css`
       background: var(--yellow-d);
       color: black;
-        }
-      `};
+      &:hover {
+        background-color: #f8d100;
+      }
+    `};
   ${(props) =>
     props.$pending &&
     css`
-        background: transparent;
-        color: var(--yellow-d);
-        border: 1px solid var(--yellow-d);
-          }
-        `};
+      background: transparent;
+      color: var(--yellow-d);
+      border: 1px solid var(--yellow-d);
+    `};
   ${(props) =>
     props.$approved &&
     css`
-          background: transparent;
-          color: var(--green-d);
-          border: 1px solid var(--green-d);
-            }
-          `};
+      background: transparent;
+      color: var(--green-d);
+      border: 1px solid var(--green-d);
+    `};
   ${(props) =>
     props.$declined &&
     css`
-            background: transparent;
-            color: var(--red);
-            border: 1px solid var(--red);
-              }
-            `};
+      background: transparent;
+      color: var(--red);
+      border: 1px solid var(--red);
+    `};
 `;
 export const TripTag = styled.div`
   border-radius: 2px;
@@ -139,49 +139,49 @@ export const Input = styled.input`
 `;
 export const Card = styled.div`
   width: 100%;
-  height:150px;
-  box-sizing:border-box;
+  height: 150px;
+  box-sizing: border-box;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   font-size: larger;
   border-radius: 50px 10px 10px 100px;
-    padding: 18px 8px 8px 30px;
-  text-transform:uppercase;
-  & .date{
+  padding: 18px 8px 8px 30px;
+  text-transform: uppercase;
+  & .date {
     grid-column: 3/4;
     grid-row: 1/2;
     justify-self: center;
     align-self: start;
   }
-  & h3{
+  & h3 {
     grid-column: 1/3;
     grid-row: 1/2;
-    font-size:22px;
-    font-weight:600;
-    text-transform:capitalize;
+    font-size: 22px;
+    font-weight: 600;
+    text-transform: capitalize;
   }
-  & .time{
+  & .time {
     grid-column: 3/4;
     grid-row: 2/4;
-    font-size:24px;
-    font-weight:600;
+    font-size: 24px;
+    font-weight: 600;
     justify-self: center;
     align-self: end;
   }
-  & .status{
+  & .status {
     grid-column: 1/3;
     grid-row: 2/3;
-    font-size:18px;
-    text-transform:capitalize;
+    font-size: 18px;
+    text-transform: capitalize;
   }
-  & .status::before{
+  & .status::before {
     content: " ";
-    display:inline-block;
-    width:10px;
-    height:10px;
-    margin-right:4px;
-    border-radius:50%;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 4px;
+    border-radius: 50%;
   }
   ${(props) =>
     props.$onboard &&
@@ -202,9 +202,10 @@ export const Card = styled.div`
   ${(props) =>
     props.$scheduled &&
     css`
-        background-color: var(--gray-l);
-       & .status::before{ background-color: var(--gray-d);}
-      
+      background-color: var(--gray-l);
+      & .status::before {
+        background-color: var(--gray-d);
+      }
     `};
   ${(props) =>
     props.$departed &&
@@ -212,11 +213,10 @@ export const Card = styled.div`
       & .status::before {
         background-color: var(--green-d);
       }
-     
-        background-color: var(--green-l);
-        background: linear-gradient(45deg, var(--green-l), var(--green-d));
-        background: linear-gradient(185deg, #cbd5d9, #8fa5ae);
-      
+
+      background-color: var(--green-l);
+      background: linear-gradient(45deg, var(--green-l), var(--green-d));
+      background: linear-gradient(185deg, #cbd5d9, #8fa5ae);
     `};
   ${(props) =>
     props.$arrived &&

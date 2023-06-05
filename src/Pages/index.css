@@ -88,7 +88,8 @@ footer{
   height:fit-content;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  column-gap:3rem;
+  align-items: flex-start;
   padding-left:3rem;
   padding-right:3rem;
   padding-top:1rem;
@@ -96,6 +97,9 @@ footer{
 }
 footer a, footer h3{
   color:#f7f7f7;
+}
+footer a:focus{
+  color:var(--yellow-d)
 }
 footer h3{
   font-weight: 600;
