@@ -22,16 +22,16 @@ function PassengerTrip() {
   useEffect(() => {
     console.log("color");
     getTrip();
-    const SOCKET = process.env.REACT_APP_BASE_SOCKET;
-    // // const SOCKET = "http://192.168.120.18:5000/";
-    let socket = io(SOCKET);
-    socket.on("connect", (args) => {
-      // setTrip(args.fullDocument);
-    });
-    return () => {
-      // Clean up the socket connection
-      socket.disconnect();
-    };
+    // const SOCKET = process.env.REACT_APP_BASE_SOCKET;
+    // // // const SOCKET = "http://192.168.120.18:5000/";
+    // let socket = io(SOCKET);
+    // socket.on("connect", (args) => {
+    //   // setTrip(args.fullDocument);
+    // });
+    // return () => {
+    //   // Clean up the socket connection
+    //   socket.disconnect();
+    // };
   }, [booked]);
 
   const getTrip = async () => {
@@ -175,11 +175,11 @@ function PassengerTrip() {
                   }}
                 />
               )}
-              {trip.tripStatus === "departed" && (
+              {/* {trip.tripStatus === "departed" && (
                 <Button $yellow onClick={navigatelive}>
                   Go Live
                 </Button>
-              )}
+              )} */}
             </div>
           </div>
         </>

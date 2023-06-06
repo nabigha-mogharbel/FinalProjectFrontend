@@ -76,6 +76,7 @@ function PassengerLive() {
 
 
     return (        <>      
+    <h1>Departed Trips</h1>
     {!isLoading&&trip.length===0 && <h1>No departed trips</h1>}
     <MapContainer style={mapContainerStyle} {...initialValues}>
     {!isLoading&&trip.length>0 && trip.map(e=> {return <Marker icon={customIcon} key={e._id} position={[e.lat.$numberDecimal, e.lon.$numberDecimal]}>

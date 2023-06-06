@@ -153,25 +153,25 @@ function ManagerLive() {
   // }, []);
   useEffect(() => {
     getTrip()
-    const socket = io(process.env.REACT_APP_BASE_SOCKET); // Replace 'your-socketio-endpoint' with your actual Socket.IO server endpoint
+  //   const socket = io(process.env.REACT_APP_BASE_SOCKET); // Replace 'your-socketio-endpoint' with your actual Socket.IO server endpoint
 
-    // Listen for the response event from the backend
-    socket.on('tripwhatching', (responseData) => {
-      console.log(responseData); // Update the component state with the received data
-    });
+  //   // Listen for the response event from the backend
+  //   socket.on('tripwhatching', (responseData) => {
+  //     console.log(responseData); // Update the component state with the received data
+  //   });
 
-    const sendRequest = () => {
-      socket.emit('msghandler', "test 10")
-      console.log("wth")
-    };
+  //   const sendRequest = () => {
+  //     socket.emit('msghandler', "test 10")
+  //     console.log("wth")
+  //   };
 
-   const ssss= setInterval( sendRequest, 3000); // Schedule the request every 10 seconds
+  //  const ssss= setInterval( sendRequest, 3000); // Schedule the request every 10 seconds
 
-   return () => {
-    clearInterval(ssss)
-    // Clean up the socket connection
-    socket.disconnect();
-  };
+  //  return () => {
+  //   clearInterval(ssss)
+  //   // Clean up the socket connection
+  //   socket.disconnect();
+  // };
   }, []);
   const getTrip = async () => {
     const URL = process.env.REACT_APP_BASE_URL;
@@ -246,7 +246,7 @@ function ManagerLive() {
     let st=new Date(e.scheduleId.startTime)
           let et=new Date(e.scheduleId.endTime)
           let date=new Date(e.date)
-    return <Card key={e._id} $departed onClick={()=> navigate(`/app/manager/live/${e._id}`)}>
+    return <Card key={e._id} $departed onClick={()=> navigate(`/app/manager/trip/${e._id}`)}>
   {" "}
   <h3>{e.scheduleId.startLocation} {e.scheduleId.endLocation}</h3>
   <div className="time"><p>{st.getHours()}:{st.getMinutes()}</p> <p>{et.getHours()}:{et.getMinutes()}</p></div>

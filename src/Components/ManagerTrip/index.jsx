@@ -23,16 +23,16 @@ function PassengerTrip() {
   const empty=useRef()
   useEffect(() => {
     getTrip();
-    const SOCKET=process.env.REACT_APP_BASE_SOCKET;
-    // const SOCKET = "http://192.168.120.18:5000/";
-    let socket = io(SOCKET);
-    socket.on("tripWatching", (args) => {
-      setTrip(args.fullDocument);
-    });
-    return () => {
-      // Clean up the socket connection
-      socket.disconnect();
-    };
+    // const SOCKET=process.env.REACT_APP_BASE_SOCKET;
+    // // const SOCKET = "http://192.168.120.18:5000/";
+    // let socket = io(SOCKET);
+    // socket.on("tripWatching", (args) => {
+    //   setTrip(args.fullDocument);
+    // });
+    // return () => {
+    //   // Clean up the socket connection
+    //   socket.disconnect();
+    // };
     // const SOCKET = process.env.REACT_APP_BASE_SOCKET;
     // console.log(SOCKET)
     // let socket = io(SOCKET);
@@ -231,13 +231,15 @@ function PassengerTrip() {
             </Link>
           </Button>
           </div>
-          {trip.tripStatus === "departed" && (
+          {/* {trip.tripStatus === "departed" && (
             <Button $yellow>
               <Link to={`/app/manager/live/${tripId.tripId}`}>Go Live</Link>
             </Button>
-          )}</>}
+          )} */}
+          </>}
           {isform&&(
-        <>  <select
+        <>  <div className="flex justify-between w-100">
+        <label>Trip Status</label><select
         value={trip.tripStatus}
         onChange={(e) => updateTripField(e, "tripStatus")}
       >
@@ -246,7 +248,9 @@ function PassengerTrip() {
         <option value="onboarding">Onboarding</option>
         <option value="declined">Declined</option>
         <option value="scheduled">Scheduled</option>
-      </select>
+      </select></div>
+      <div className="flex justify-between w-100">
+        <label>Bus Status</label>
       <select
         value={trip.busStatus}
         onChange={(e) => updateTripField(e, "busStatus")}
@@ -255,23 +259,25 @@ function PassengerTrip() {
         <option value="delayed">Delayed</option>
         <option value="onboarding">Onboarding</option>
         <option value="good">Good</option>
-      </select>
+      </select></div>
+      <div className="flex justify-between w-100">
       <label htmlFor="start">Depart Time</label>
       <input type="datetime-local" id="start" defaultValue={new Date(trip.startTime)} ref={timeS} onChange={(e)=>{
         let today=new Date()
         today.setUTCHours=parseInt(timeS.current.value.split(":")[0])
         today.setUTCMinutes=parseInt(timeS.current.value.split(":")[1])
-        console.log(timeS.current.value, new Date(timeS.current.value).toISOString())}}/>
+        console.log(timeS.current.value, new Date(timeS.current.value).toISOString())}}/></div>
+        <div className="flex justify-between w-100">
         <label htmlFor="start">Arrive Time</label>
       <input type="datetime-local" id="start" defaultValue={new Date(trip.endTime)} ref={timeE} onChange={(e)=>{
         let today=new Date()
         today.setUTCHours=parseInt(timeE.current.value.split(":")[0])
         today.setUTCMinutes=parseInt(timeE.current.value.split(":")[1])
-        console.log(timeE.current.value, new Date(timeE.current.value).toISOString())}}/>
+        console.log(timeE.current.value, new Date(timeE.current.value).toISOString())}}/></div>
+        <div className="flex justify-between w-100">
          <label htmlFor="empty">Empty seats</label>
-      <input type="number" id="empty" defaultValue={trip.emptySeats} ref={empty} onChange={(e)=>{
-        console.log(timeE.current.value)}}/>
-      <div>
+      <input type="number" id="empty" defaultValue={trip.emptySeats} ref={empty} onChange={(e) => updateTripField(e, "emptySeats")}/></div>      
+      <div className="flex justify-between w-100">
       <Button onClick={()=>showForm(false)}>Cancel</Button><Button onClick={updateTrip}>Update</Button></div></>
       )}
         </>

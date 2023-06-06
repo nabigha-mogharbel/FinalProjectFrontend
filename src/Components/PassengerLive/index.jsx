@@ -40,29 +40,29 @@ function PassengerLive() {
     const tripId = useParams();
     useEffect(()=>{
         getTrip();
-        const SOCKET=process.env.REACT_APP_BASE_SOCKET;
+        // const SOCKET=process.env.REACT_APP_BASE_SOCKET;
     // const SOCKET = "http://192.168.120.18:5000/";
-    let socket = io(SOCKET);
-    socket.on("tripWatching", (args) => {
-      // let batata = { ...args };
-      // console.log("batataaaaaa", batata);
-      // if (batata) {
-      //   if (batata.documentKey._id === tripId.tripId) {
-      //     const arg = batata["updateDescription"]["updatedFields"];
-      //     delete arg.scheduleId;
-      //     console.log(arg);
-      //     let cc = { ...trip, ...arg };
-      //     console.log("bobo", cc);
-      //     setTrip(cc);
-      //   }
-      // }
-      setTrip(args.fullDocument);
+    // let socket = io(SOCKET);
+    // socket.on("tripWatching", (args) => {
+    //   // let batata = { ...args };
+    //   // console.log("batataaaaaa", batata);
+    //   // if (batata) {
+    //   //   if (batata.documentKey._id === tripId.tripId) {
+    //   //     const arg = batata["updateDescription"]["updatedFields"];
+    //   //     delete arg.scheduleId;
+    //   //     console.log(arg);
+    //   //     let cc = { ...trip, ...arg };
+    //   //     console.log("bobo", cc);
+    //   //     setTrip(cc);
+    //   //   }
+    //   // }
+    //   setTrip(args.fullDocument);
 
-    });
-    return () => {
-      // Clean up the socket connection
-      socket.disconnect();
-    };
+    // });
+    // return () => {
+    //   // Clean up the socket connection
+    //   socket.disconnect();
+    // };
     }, [])
     const customIcon = new L.Icon({
       iconUrl: require('../../Images/icon.png'),
@@ -91,7 +91,9 @@ function PassengerLive() {
         }
       };
 
-    return (         <MapContainer style={mapContainerStyle} {...initialValues}>
+    return (         
+      <> <h1>Check Live Trips
+        </h1>   <MapContainer style={mapContainerStyle} {...initialValues}>
       <Marker icon={customIcon} position={[34.434310, 35.835937]}>
      
     </Marker>
@@ -101,7 +103,8 @@ function PassengerLive() {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
      
-      </MapContainer> );
+      </MapContainer></>
+ );
 }
 
 export default PassengerLive;
