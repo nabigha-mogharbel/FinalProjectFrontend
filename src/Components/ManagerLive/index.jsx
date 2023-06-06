@@ -4,6 +4,7 @@ import io from "socket.io-client";
 import { useParams, useNavigate } from "react-router-dom";
 import L, { LatLng } from "leaflet";
 import { Card } from "../Styled";
+// import {socket} from "../../socket"
 import axios from "axios";
 import "leaflet/dist/leaflet.css";
 import throttle from "lodash/throttle";
@@ -128,18 +129,50 @@ function ManagerLive() {
   const tripId = useParams();
   const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   getTrip();
+  //   const ss=io(process.env.REACT_APP_BASE_SOCKET)
+  //   ss.on("testbatata", (args)=>{
+  //     console.log(args)
+  //   })
+  //   ss.on("khara", (args)=>{
+  //     console.log(args)
+  //   })
+  //   ss.emit('testbatata', "batataaaa");
+
+    
+  //   // setInterval(updateLocation, 10000);
+  //   if(tripId.tripId!=="all"){
+  //     // let socket = io(process.env.REACT_APP_BASE_SOCKET);
+  //   socket.on("tripWatching", (args) => {
+  //     // setTrip(args.fullDocument);
+  //     console.log(args)
+
+  //   });
+  //   }
+  // }, []);
   useEffect(() => {
-    getTrip();
-    setInterval(updateLocation, 10000);
-    if(tripId.tripId!=="all"){
-      let socket = io(process.env.REACT_APP_BASE_SOCKET);
-    socket.on("tripWatching", (args) => {
-      setTrip(args.fullDocument);
+    getTrip()
+    const socket = io(process.env.REACT_APP_BASE_SOCKET); // Replace 'your-socketio-endpoint' with your actual Socket.IO server endpoint
 
+    // Listen for the response event from the backend
+    socket.on('tripwhatching', (responseData) => {
+      console.log(responseData); // Update the component state with the received data
     });
-    }
-  }, []);
 
+    const sendRequest = () => {
+      socket.emit('msghandler', "test 10")
+      console.log("wth")
+    };
+
+   const ssss= setInterval( sendRequest, 3000); // Schedule the request every 10 seconds
+
+   return () => {
+    clearInterval(ssss)
+    // Clean up the socket connection
+    socket.disconnect();
+  };
+  }, []);
   const getTrip = async () => {
     const URL = process.env.REACT_APP_BASE_URL;
     let id = tripId.tripId;
@@ -148,13 +181,14 @@ function ManagerLive() {
       
         console.log("token", token.decoded);
         axios
-          .get(`${URL}app/trip/`, {
+          .get(`${URL}app/trip/sched/upcoming`, {
             headers: { Authorization: `Bearer ${token.token}` },
           })
           .then(
             function (success) {
               if (success.status === 200 || success.status === 304) {
                 let filtered=success.data.data.filter(e=> e.tripStatus==="departed")
+                console.log("f", filtered, filtered.length)
                 setTrip(filtered);
                 setLoading(false);
               }
@@ -175,12 +209,14 @@ function ManagerLive() {
           function (success) {
             if (success.status === 200 || success.status === 304) {
              if( success.data.data[0].busManagerId._id===token.decoded.userId && success.data.data[0].tripStatus==="departed")
-              setTrip(success.data.data);
+             
+             setTrip(success.data.data);
               setLoading(false);
             }
           },
           function (reject) {}
         );
+       
     } catch (error) {
       console.log(error);
     }}
@@ -204,8 +240,8 @@ function ManagerLive() {
       }
     }, function(lolo){console.log(lolo)}, { enableHighAccuracy: true });
   };
-  if(tripId.tripId==="all"){return <div className="w-11/12">
-    <h1>Departing Trips</h1>
+  if(tripId.tripId==="all" && trip.length>0 ){return <div className="tripList w-11/12">
+    <h1 className="pb-2 border-b-2 border-gray-300">Departing Trips</h1>
     {trip.map(e=> {
     let st=new Date(e.scheduleId.startTime)
           let et=new Date(e.scheduleId.endTime)
@@ -217,7 +253,12 @@ function ManagerLive() {
   <div className="status">{e.tripStatus}</div>
   <p className="date">{date.getDate()}{"-"}{date.getMonth()+1}</p>
 </Card>})}</div>}
-  else{return <>{!isLoading&&trip.length===0 && <p>No trip</p>}{!isLoading&&trip.length>0 && <p>yay</p>}
+ if(tripId.tripId==="all" && trip.length===0 ){return <div className="tripList w-11/12">
+ <h1 className="pb-2 border-b-2 border-gray-300">Departing Trips</h1>
+      <p>No trips</p>
+</div>}
+  else{return <>{!isLoading&& trip.length===0 && <p>No trip</p>}
+  {!isLoading&&trip.length>0 && <p>yay</p>}
   {isLoading && <Loader />}</>;}
 }
 export default ManagerLive;

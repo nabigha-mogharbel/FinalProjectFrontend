@@ -5,6 +5,7 @@ import {URL} from "../vars"
 import {Button, Input} from "./Styled"
 import { useNavigate, Link } from "react-router-dom";
 import Swal from "sweetalert2"
+import Loader from "../Components/Loading"
 import { ToastContainer, toast } from 'react-toastify';
 import { decodeToken } from "react-jwt";
 import cookie from "universal-cookie"
@@ -17,35 +18,66 @@ function Login(props) {
         const [errors, setError]=useState("")
     const [errorPhone, setErrorPhone]=useState(false)
     const [errorPassword, setErrorPassword]=useState(false)
+    const [loading, setLoading]=useState(false)
     const login=async(body)=>{
+        setLoading(true)
         try{
         const URL=process.env.REACT_APP_BASE_URL;
         // const URL="http://192.168.120.18:8000/"
-        const logging=await axios.post(`${URL}app/auth/login`,body)
+       axios.post(`${URL}app/auth/login`,body).then(
+        function(success){
+            if(success.status===200){
+                const Cookie=new cookie();
+                Cookie.set("token", success.data.token,{
+                    path: '/',
+                    maxAge: 31536000,
+                })
+                setLoading(false)
+                toast.success(success.data.message, {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    });
+                    const nav=()=>{
+                        if(decodeToken(success.data.token).role==="manager"){navigate("/app/manager/")}
+                    else if(decodeToken(success.data.token).role==="passenger"){navigate("/app/passenger/")}
+                    }
+                    setTimeout(nav, 3000)
+                    
+            }else{
+                setLoading(false)
+                toast.error(success.data.message, {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    });
+            }
+        }, function(reject){
+            setLoading(false)
+                toast.error("error checking your credentials", {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    });
+        }
+       )
     
-         if(logging.status===200){
-            const Cookie=new cookie();
-            Cookie.set("token", logging.data.token,{
-                path: '/',
-                maxAge: 31536000,
-            })
-            toast.success(logging.data.message, {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                });
-                const nav=()=>{
-                    if(decodeToken(logging.data.token).role==="manager"){navigate("/app/manager/")}
-                else if(decodeToken(logging.data.token).role==="passenger"){navigate("/app/passenger/")}
-                }
-                setTimeout(nav, 3000)
-                
-        }}catch(error){
+     }catch(error){
             setError(error.message.data)
                 toast.error(error.message.data, {
                     position: "top-right",
@@ -100,7 +132,8 @@ function Login(props) {
 
     }
     return (
-        <form  onSubmit={submitLogin}>
+        <>
+        
             <ToastContainer 
 
 position="top-right"
@@ -113,7 +146,7 @@ pauseOnFocusLoss
 draggable
 pauseOnHover
 theme="light"
-/>         
+/>        { !loading&&<form  onSubmit={submitLogin}>
             {errorPhone && <p className='formerror'>* Phone number is required</p>}
             <label htmlFor='phone'>Phone Number<sup>*</sup></label>
             {!errorPhone &&<Input onChange={(e)=>setFormData(e, "phone")} value={form.phone} name="phone"  id="phone" placeholder='Enter Your Phone Number'/>}
@@ -125,7 +158,9 @@ theme="light"
             {errorPassword && <Input type="password" $error onChange={(e)=>setFormData(e, "password")} value={form.password} placeholder="Enter Your Password" name="password" id="password"/>}
             <Button type="submit" className="self-center">Login</Button>
             <Link to="/app/signup" className="mt-2 self-center" style={{textDecoration:"underline"}}>You don't have an account?</Link>
-        </form>
+        </form>}
+        {loading&&<Loader/>}
+        </>
  );
 }
 

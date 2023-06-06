@@ -5,7 +5,7 @@ import L, { LatLng } from 'leaflet';
 import axios from "axios"
 import 'leaflet/dist/leaflet.css';
 import throttle from 'lodash/throttle';
-import iconDrop from "./marker-icon-2x.svg"
+import iconDrop from "./marker-icon-2x.png"
 import { TokenContext, ColorPallete } from "../../context";
 
 import {
@@ -59,14 +59,20 @@ function PassengerLive() {
       setTrip(args.fullDocument);
 
     });
+    return () => {
+      // Clean up the socket connection
+      socket.disconnect();
+    };
     }, [])
-   
+    const customIcon = new L.Icon({
+      iconUrl: require('../../Images/icon.png'),
+      iconSize: [25, 40], // Adjust the size of the icon
+    });
     const getTrip = async () => {
 
         const URL = process.env.REACT_APP_BASE_URL;
         try {
           let id = tripId.tripId;
-          console.log("token", token.decoded);
           axios
             .get(`${URL}app/trip/trip/${id}`, {
               headers: { Authorization: `Bearer ${token.token}` },
@@ -85,32 +91,11 @@ function PassengerLive() {
         }
       };
 
-    const DropLocationMarker = () => {
-        const markerIcon = L.icon({
-          iconUrl: iconDrop,
-          iconSize: [50, 40], // size of the icon
-          popupAnchor: [-3, -20], // point from which the popup should open relative to the iconAnchor
-        });
-        try {
-          const shipment = trip
-          const coordinates = shipment?.dropLocation?.coordinates;
-          return Array.isArray(coordinates) ? (
-            <Marker position={[coordinates[1], coordinates[0]]} icon={markerIcon}>
-              <Popup>Delivery location</Popup>
-            </Marker>
-          ) : null;
-        } catch (error) {
-          console.error(error);
-          return null;
-        }
-      };
     return (         <MapContainer style={mapContainerStyle} {...initialValues}>
-      <Marker position={[34.434310, 35.835937]}>
-     batata helwe
+      <Marker icon={customIcon} position={[34.434310, 35.835937]}>
+     
     </Marker>
-    <Marker position={[34.43433, 36.835900]}>
-     batata helwe
-    </Marker>
+
         <TileLayer
           url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

@@ -3,7 +3,7 @@ import axios from "axios";
 import { Card, Button, Status, TripTag } from "../Styled";
 import Loader from "../Loading";
 import { io } from "socket.io-client";
-import {socket} from "../../socket"
+// import {socket} from "../../socket"
 import map from "../../Images/map.webp";
 import { useNavigate, useLocation, useParams, Link } from "react-router-dom";
 import "./index.css";
@@ -22,13 +22,16 @@ function PassengerTrip() {
   useEffect(() => {
     console.log("color");
     getTrip();
-    // const SOCKET = process.env.REACT_APP_BASE_SOCKET;
+    const SOCKET = process.env.REACT_APP_BASE_SOCKET;
     // // const SOCKET = "http://192.168.120.18:5000/";
-    // let socket = io(SOCKET);
+    let socket = io(SOCKET);
     socket.on("connect", (args) => {
       // setTrip(args.fullDocument);
-      console.log("wow stuff")
     });
+    return () => {
+      // Clean up the socket connection
+      socket.disconnect();
+    };
   }, [booked]);
 
   const getTrip = async () => {

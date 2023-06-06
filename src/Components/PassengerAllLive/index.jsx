@@ -3,7 +3,6 @@ import L, { LatLng } from 'leaflet';
 import axios from "axios"
 import 'leaflet/dist/leaflet.css';
 import throttle from 'lodash/throttle';
-import iconDrop from "./marker-icon-2x.svg"
 import { TokenContext, ColorPallete } from "../../context";
 
 import {
@@ -39,7 +38,10 @@ function PassengerLive() {
         getTrip();
      
     }, [])
-   
+    const customIcon = new L.Icon({
+      iconUrl: require('../../Images/icon.png'),
+      iconSize: [25, 40], // Adjust the size of the icon
+    });
     const getTrip = async () => {
 
         const URL = process.env.REACT_APP_BASE_URL;
@@ -76,7 +78,7 @@ function PassengerLive() {
     return (        <>      
     {!isLoading&&trip.length===0 && <h1>No departed trips</h1>}
     <MapContainer style={mapContainerStyle} {...initialValues}>
-    {!isLoading&&trip.length>0 && trip.map(e=> {return <Marker key={e._id} position={[e.lat.$numberDecimal, e.lon.$numberDecimal]}>
+    {!isLoading&&trip.length>0 && trip.map(e=> {return <Marker icon={customIcon} key={e._id} position={[e.lat.$numberDecimal, e.lon.$numberDecimal]}>
       <Tooltip>{e.scheduleId.startLocation} {e.scheduleId.endLocation}</Tooltip>
     </Marker> })}
 

@@ -28,6 +28,7 @@ import ManagerLive from "./Components/ManagerLive"
 import PassengerMain from "./Components/PassengerMain";
 import PassengerTrip from "./Components/PassengerTrip";
 import "./App.css";
+import Schedule from "./Components/Schedule";
 import PassengerSettings from "./Components/PassengerSettings";
 import { TokenContext, ColorPallete, colors } from "./context";
 import NotSupported from "./Pages/NotSupp";
@@ -105,7 +106,7 @@ function App() {
               }
             >
               <Route path="" element={<PassengerMain />} />
-              <Route path="schedule/" element={<>scheule</>} />
+              <Route path="schedule/" element={<Schedule/>} />
               <Route path="trip/:tripId/" element={<PassengerTrip />} />
               <Route path="live/trip/:tripId" element={<PassengerLive />} />
               <Route
@@ -135,7 +136,7 @@ function App() {
               }
             >
               <Route path="" element={<ManagerMain />} />
-              <Route path="schedule" />
+              <Route path="schedule" element={<Schedule/>}/>
               <Route path="trip/:tripId" element={<ManagerTrip />} />
               <Route path="live/:tripId" element={<ManagerLive />} />
               <Route path="bookings/:tripId" element={<ManagerBookings />} />

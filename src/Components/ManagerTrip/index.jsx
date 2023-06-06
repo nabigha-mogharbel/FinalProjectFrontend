@@ -5,6 +5,7 @@ import { Switch } from "@headlessui/react";
 import Popup from "../Popup";
 import Loader from "../Loading";
 import { io } from "socket.io-client";
+// import {socket} from "../../socket"
 import map from "../../Images/map.webp";
 import { useNavigate, useLocation, useParams, Link } from "react-router-dom";
 import "./index.css";
@@ -22,23 +23,34 @@ function PassengerTrip() {
   const empty=useRef()
   useEffect(() => {
     getTrip();
-    const SOCKET = process.env.REACT_APP_BASE_SOCKET;
-    console.log(SOCKET)
+    const SOCKET=process.env.REACT_APP_BASE_SOCKET;
+    // const SOCKET = "http://192.168.120.18:5000/";
     let socket = io(SOCKET);
     socket.on("tripWatching", (args) => {
-      // let batata = { ...args };
-      // if (batata) {
-      //   if (batata.documentKey._id === tripId.tripId) {
-      //     const arg = batata["updateDescription"]["updatedFields"];
-      //     delete arg.scheduleId;
-      //     console.log("sock sock");
-      //     let cc = { ...trip, ...arg };
-      //     console.log("bobo", cc);
-      //     setTrip(cc);
-      //   }
-      // }
       setTrip(args.fullDocument);
     });
+    return () => {
+      // Clean up the socket connection
+      socket.disconnect();
+    };
+    // const SOCKET = process.env.REACT_APP_BASE_SOCKET;
+    // console.log(SOCKET)
+    // let socket = io(SOCKET);
+    // socket.on("tripWatching", (args) => {
+    //   // let batata = { ...args };
+    //   // if (batata) {
+    //   //   if (batata.documentKey._id === tripId.tripId) {
+    //   //     const arg = batata["updateDescription"]["updatedFields"];
+    //   //     delete arg.scheduleId;
+    //   //     console.log("sock sock");
+    //   //     let cc = { ...trip, ...arg };
+    //   //     console.log("bobo", cc);
+    //   //     setTrip(cc);
+    //   //   }
+    //   // }
+    //   setTrip(args.fullDocument);
+    // });
+    
     
   }, []);
 

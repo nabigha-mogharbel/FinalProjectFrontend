@@ -34,6 +34,10 @@ function ManagerBookings() {
         }
       }
     });
+    return () => {
+      // Clean up the socket connection
+      socket.disconnect();
+    };
   }, []);
   const getBookings = async () => {
     const URL = process.env.REACT_APP_BASE_URL;

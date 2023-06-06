@@ -1,0 +1,46 @@
+.generic-container {
+    height:100vh;
+    width:100vw;
+    position: absolute;
+    top:0;
+    left:0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url(../../Images/baba.png);
+    text-align: center;
+  }
+  .generic-container div{
+    background-color: #f0f8ff7a;
+    padding:16px;
+    border-radius: 10px;
+  }
+  
+  .generic-container h1 {
+    color: var(--green-d);
+    font-size: 6rem;
+    margin-bottom: 1rem;
+
+  }
+  
+  .generic-container p {
+    color: var(--green-d);
+    font-size: 3rem;
+    margin-bottom: 2rem;
+  }
+  
+  a {
+    color: green;
+    text-decoration: none;
+  }
+  
+  @media (max-width: 768px) {
+    .generic-container h1 {
+      font-size: 2rem;
+    }
+    
+    .generic-container p {
+      font-size: 1.2rem;
+    }
+  }

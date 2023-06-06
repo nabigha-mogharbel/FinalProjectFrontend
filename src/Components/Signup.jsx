@@ -3,6 +3,7 @@ import axios from "axios"
 import {Button, Input} from "./Styled"
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate, Link } from "react-router-dom"
+import Loader from "../Components/Loading"
 function Signup() {
     const navigate = useNavigate();
     const toastId = useRef(null);
@@ -13,35 +14,24 @@ function Signup() {
         password:"",
         role:"passenger"
     })
+    const [loading, setLoading]=useState(false)
     const [repass, setRepass]=useState("")
     const [errorPhone, setErrorPhone]=useState(false)
     const [errorPassword, setErrorPassword]=useState(false)
     const [errorFN, setErrorFN]=useState(false)
     const [errorLN, setErrorLN]=useState(false)
     const [errorMatchPass, setErrorMatchPass]=useState(false)
-    const [wait,setWait]=useState(false)
-    useEffect(()=>{ if(form.password!==repass){
-        setErrorMatchPass(true)
-    }
-    if(form.password===repass){
-        setErrorMatchPass(false)
-    }}, [repass])
+    useEffect(()=>{
+     
+   }, [])
     const signup=async(body)=>{
-        if(wait){return toast.warning("please wait", {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            }); }
-        else{
+        setLoading(true)
+
         const URL=process.env.REACT_APP_BASE_URL;
       try{axios.post(`${URL}app/auth/register`,body).then(
         function(s){
             console.log(s)
+            setLoading(false)
             toast.success(`${s.data.message}`, {
                 position: "top-right",
                 autoClose: 3000,
@@ -69,7 +59,7 @@ function Signup() {
                 progress: undefined,
                 theme: "light",
                 });
-                setWait(false)
+                setLoading(false)
         }
       )
     }catch(error){
@@ -83,8 +73,7 @@ function Signup() {
             progress: undefined,
             theme: "light",
             });
-            setWait(false)
-    }}
+    }
 
     }
     const submitSignup= (e)=>{
@@ -161,8 +150,7 @@ function Signup() {
 
     return (
         <>
-        <form  onSubmit={submitSignup}>
-        <ToastContainer 
+         <ToastContainer 
 
 position="top-right"
 autoClose={3000}
@@ -172,6 +160,8 @@ closeOnClick
 rtl={false}
 theme="light"
 /> 
+        {!loading&&<form  onSubmit={submitSignup}>
+       
             {errorFN && <p className='formerror'>* First Name is required</p>}
             <label htmlFor='firstName'>First Name<sup>*</sup></label>
             {!errorFN && <Input name="firstName" onChange={(e)=>setFormData(e, "firstName")} value={form.firstName} id="firstName" placeholder='Enter Your First Name'/>}
@@ -183,9 +173,9 @@ theme="light"
             {errorLN&&<Input $error name="lastName" onChange={(e)=>setFormData(e, "lastName")} value={form.lastName} id="lastName" placeholder='Enter Your Phone Number'/>}
 
             {errorPhone && <p className='formerror'>* Phone number is required</p>}
-            <label htmlFor='phone'>Phone Number<sup>*</sup></label>
-            {!errorPhone &&<Input onChange={(e)=>setFormData(e, "phone")} value={form.phone} name="phone"  id="phone" placeholder='Enter Your Phone Number'/>}
-            {errorPhone &&<Input $error onChange={(e)=>setFormData(e, "phone")} value={form.phone} name="phone"  id="phone" placeholder='Enter Your Phone Number'/>}
+            <label htmlFor='phone'>Phone Number<sup>*</sup> <span style={{fontSize:"10px"}}>(only number, no spaces or characters)</span></label>
+            {!errorPhone &&<Input type="number" onChange={(e)=>setFormData(e, "phone")} value={form.phone} name="phone"  id="phone" placeholder='Enter Your Phone Number'/>}
+            {errorPhone &&<Input type="number" $error onChange={(e)=>setFormData(e, "phone")} value={form.phone} name="phone"  id="phone" placeholder='Enter Your Phone Number'/>}
 
             {errorPassword && <p className='formerror'>* Password is required</p>}
             <label htmlFor='password'>Password<sup>*</sup></label>
@@ -197,7 +187,8 @@ theme="light"
             <Button type="submit" className="self-center">Signup</Button>
         
         <Link to="/app/login" style={{textDecoration:"underline"}} className=" self-center mt-2" >Already registed?</Link>
-        </form>
+        </form>}
+        {loading&&<Loader/>}
         </>
  );
 }
