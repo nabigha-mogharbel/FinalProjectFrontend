@@ -28,6 +28,17 @@
     font-family: 'Kanis', sans-serif;
     /* background-color: #f7f7f7; */
 }
+.swal2-popup {
+    font-family: "Kanis", serif !important;
+    font-size: 12px !important;
+  }
+  .swal2-icon.swal2-success [class^=swal2-success-line] {
+
+    background-color: var(--green-d) !important;
+}
+.swal2-icon.swal2-success .swal2-success-ring{
+    border: 0.25em solid var(--green-l) !important;
+}
 
 .navbar {
     background-color: rgb(22, 7, 36);

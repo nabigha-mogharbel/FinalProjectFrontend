@@ -1,0 +1,31 @@
+.tabs{
+    border:1px solid #ccc;
+    padding:6px 8px;
+    border-radius: 8px;
+}
+.tab{
+    border: 2px solid transparent;
+    transition: color;
+
+}
+select{
+    padding: 6px 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f7f7f7;
+}
+
+.active{
+    border: 2px solid var(--yellow-d);
+    border-radius: 8px;
+    padding: 6px 8px;
+    background-color: var(--yellow-l);
+    color:var(--green-d)
+}
+.swal2-styled.swal2-confirm{
+    background-color: var(--green-d) !important;
+}
+.swal2-styled.swal2-cancel{
+    background-color: var(--red-d) !important;
+}

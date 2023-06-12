@@ -246,7 +246,7 @@ function PassengerTrip() {
         <option value="departed">Departed</option>
         <option value="arrived">Arrived</option>
         <option value="onboarding">Onboarding</option>
-        <option value="declined">Declined</option>
+        <option value="canceled">Canceled</option>
         <option value="scheduled">Scheduled</option>
       </select></div>
       <div className="flex justify-between w-100">

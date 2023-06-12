@@ -2,9 +2,9 @@ import { useEffect, useState, useContext, useRef } from "react";
 import axios from "axios";
 import { Card, Button, Status, TripTag } from "../Styled";
 import Loader from "../Loading";
-import { io } from "socket.io-client";
 // import {socket} from "../../socket"
 import map from "../../Images/map.webp";
+import empty from "../../Images/empty.webp"
 import { useNavigate, useLocation, useParams, Link } from "react-router-dom";
 import "./index.css";
 import Swal from "sweetalert2";
@@ -68,7 +68,7 @@ function PassengerTrip() {
   };
   const toggleBookingPrompt = () => {
     Swal.fire({
-      title: "Are you sure you want to book",
+      title: "Are you sure you want to book?",
       showCancelButton: true,
       confirmButtonColor: "#3a70a1",
       cancelButtonColor: "#d33",
@@ -129,7 +129,7 @@ function PassengerTrip() {
             </Button>
             <div className="flex gap-2">
               <h1 className="flex justify-between gap-2 p-0 m-0">
-                {trip.scheduleId.startLocation} {trip.scheduleId.endLocation}
+                {trip.scheduleId.startLocation} {" "} {trip.scheduleId.endLocation}
               </h1>
               <div className="flex flex-column justify-start gap-2">
                 <State2 state={trip.tripStatus} text={trip.tripStatus} />{" "}

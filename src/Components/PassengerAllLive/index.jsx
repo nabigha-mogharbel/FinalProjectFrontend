@@ -4,6 +4,7 @@ import axios from "axios"
 import 'leaflet/dist/leaflet.css';
 import throttle from 'lodash/throttle';
 import { TokenContext, ColorPallete } from "../../context";
+import empty from "../../Images/empty.webp"
 
 import {
   MapContainer,
@@ -75,11 +76,11 @@ function PassengerLive() {
       };
 
 
-    return (        <>      
-    <h1>Departed Trips</h1>
-    {!isLoading&&trip.length===0 && <h1>No departed trips</h1>}
-    <MapContainer style={mapContainerStyle} {...initialValues}>
-    {!isLoading&&trip.length>0 && trip.map(e=> {return <Marker icon={customIcon} key={e._id} position={[e.lat.$numberDecimal, e.lon.$numberDecimal]}>
+    return (        <div className='tripList w-11/12'>      
+    <h1 className='pb-2 border-b-2 border-gray-300'>Departed Trips</h1>
+    {!isLoading&&trip.length===0 && <img src={empty}/>}
+    {!isLoading&&trip.length>0 && <MapContainer style={mapContainerStyle} {...initialValues}>
+     {trip.map(e=> {return <Marker icon={customIcon} key={e._id} position={[e.lat.$numberDecimal, e.lon.$numberDecimal]}>
       <Tooltip>{e.scheduleId.startLocation} {e.scheduleId.endLocation}</Tooltip>
     </Marker> })}
 
@@ -88,7 +89,7 @@ function PassengerLive() {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
      
-      </MapContainer></> );
+      </MapContainer>}</div> );
 }
 
 export default PassengerLive;

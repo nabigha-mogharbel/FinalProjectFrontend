@@ -2,6 +2,7 @@ import { useEffect, useState , useContext} from "react";
 import axios from "axios";
 import { Card } from "../Styled";
 import Loader from "../Loading"
+import empty from "../../Images/empty.webp"
 import { useNavigate } from "react-router-dom";
 import "./index.css";
 import { TokenContext } from "../../context";
@@ -28,12 +29,20 @@ function PassengerMain() {
       console.log(error);
     }
   };
+  const [startL, setStartL]=useState("Tripoli")
   return (
     <div className="tripList w-11/12">
       <h1 className="pb-2 border-b-2 border-gray-300">Upcoming Trips</h1>
+      <div style={{width:"100%"}} className="flex justify-between items-center gap-4 mb-4">
+                <label>Select schedule:</label>
+                <select onChange={(e)=> {setStartL(e.target.value)}}>
+        <option value="Tripoli">Tripoli - Aaba</option>
+        <option value="Aaba">Aaba - Tripoli</option>
+      </select></div>
+     
       {!isLoading &&
         trips !== null &&
-        trips.map((e) => {
+        trips.filter(t => {return t.scheduleId.startLocation===startL}).map((e) => {
           let st=new Date(e.scheduleId.startTime)
           let et=new Date(e.scheduleId.endTime)
           let date=new Date(e.date)
@@ -94,7 +103,7 @@ function PassengerMain() {
                 return <div key={e._id}></div>
           }
         })}
-      {!isLoading && trips === null && <div>Faraghhhhhhghghghghghg</div>}
+      {!isLoading && trips.length === 0 && <div>No Trips for today</div>}
       {isLoading && <Loader/>}
     </div>
   );

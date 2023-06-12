@@ -1,4 +1,4 @@
-import {useState, useRef} from "react"
+import {useState, useRef, useEffect} from "react"
 import {login} from "../fetchingFunctions/auth"
 import axios from "axios"
 import {URL} from "../vars"
@@ -33,16 +33,23 @@ function Login(props) {
                     maxAge: 31536000,
                 })
                 setLoading(false)
-                toast.success(success.data.message, {
-                    position: "top-right",
-                    autoClose: 3000,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                    });
+                // toast.success(success.data.message, {
+                //     position: "top-right",
+                //     autoClose: 3000,
+                //     hideProgressBar: true,
+                //     closeOnClick: true,
+                //     pauseOnHover: true,
+                //     draggable: true,
+                //     progress: undefined,
+                //     theme: "light",
+                //     });
+                    Swal.fire({
+                        icon:"success",
+                        title: "Logged successfully",
+                         timer: 3000,
+                        showCancelButton: false,
+                        showConfirmButton: false
+                      })
                     const nav=()=>{
                         if(decodeToken(success.data.token).role==="manager"){navigate("/app/manager/")}
                     else if(decodeToken(success.data.token).role==="passenger"){navigate("/app/passenger/")}
@@ -131,22 +138,11 @@ function Login(props) {
         }
 
     }
+
     return (
         <>
         
-            <ToastContainer 
-
-position="top-right"
-autoClose={3000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="light"
-/>        { !loading&&<form  onSubmit={submitLogin}>
+              { !loading&&<form  onSubmit={submitLogin}>
             {errorPhone && <p className='formerror'>* Phone number is required</p>}
             <label htmlFor='phone'>Phone Number<sup>*</sup></label>
             {!errorPhone &&<Input onChange={(e)=>setFormData(e, "phone")} value={form.phone} name="phone"  id="phone" placeholder='Enter Your Phone Number'/>}
